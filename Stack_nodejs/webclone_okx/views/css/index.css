@@ -10,6 +10,10 @@ body {
 }
 
 /* nav start */
+:root {
+  --nav-height: 50px;
+}
+
 .nav {
   position: absolute;
   width: 100vw;
@@ -77,7 +81,8 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  height: 40px;
+  height: var(--nav-height);
+  position: relative;
 }
 
 .nav li span {
@@ -91,6 +96,39 @@ body {
 .nav .nav_buy {
   width: 110px;
   display: flex;
+}
+.nav_buy .buy_item {
+  cursor: none;
+  display: none;
+  position: absolute;
+  left: 0;
+  top: var(--nav-height);
+  width: 260px;
+  height: 210px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: #000;
+  transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+  animation: navitem 0.25s;
+}
+@keyframes navitem {
+  from {
+    top: 60px;
+    opacity: 0;
+  }
+  to {
+    top: var(--nav-height);
+    opacity: 1;
+  }
+}
+
+.nav_buy:hover .buy_item {
+  display: block;
+  color: #000;
+  animation: navitem 1s;
+}
+.nav_buy:hover .buy_item a {
+  color: #000;
 }
 
 .nav .nav_dis {
@@ -127,19 +165,31 @@ body {
   width: 70px;
 }
 
-.nav .nav_buy .arw,
-.nav .nav_dis .arw,
-.nav .nav_trade .arw,
-.nav .nav_grow .arw,
-.nav .nav_build .arw,
-.nav .nav_ins .arw,
-.nav .nav_learn .arw,
-.nav .nav_more .arw {
+.arw {
   margin-left: 5px;
-  background-color: #fff;
-  height: 10px;
+  /* background-color: #fff; */
+  height: 12px;
   aspect-ratio: 1/1;
-  transition: all 1s;
+  transition: all 0.25s;
+  background-image: url("/image/angle-up-solid.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  filter: invert(100%);
+  transform: rotate(180deg);
+}
+.arw::before {
+  /* content: url("/image/angle-up-solid.svg"); */
+}
+
+.nav_buy:hover .arw,
+.nav_dis:hover .arw,
+.nav_trade:hover .arw,
+.nav_grow:hover .arw,
+.nav_build:hover .arw,
+.nav_ins:hover .arw,
+.nav_learn:hover .arw,
+.nav_more:hover .arw {
+  transform: rotate(0);
 }
 
 .nav .nav_null {
@@ -214,13 +264,14 @@ body {
 }
 
 .main_lt .email input {
+  color: #fff;
   box-sizing: border-box;
   width: 360px;
   height: 60px;
   background-color: #000;
   border: 1px solid #fff;
   border-radius: 5px;
-  padding: 0 10px;
+  padding: 0 20px;
   font-size: 18px;
 }
 

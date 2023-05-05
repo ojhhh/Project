@@ -14,6 +14,8 @@ app.set("view engine", "ejs");
 // 정적 파일 선언
 // 이거 추가해 주니 css 인식됨
 app.use(express.static("views"));
+// 이렇게 해주니 css에서 image 폴더에 접근가능
+app.set("images", path.join(__dirname, "views/image"));
 
 app.use(express.urlencoded({ extended: false }));
 
