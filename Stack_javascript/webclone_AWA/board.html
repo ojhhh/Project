@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>board</title>
+    <link rel="stylesheet" href="./css/board.css" />
+    <link rel="stylesheet" href="./css/home.css" />
+    <link rel="stylesheet" href="./css/login.css" />
+  </head>
+  <body>
+    <header data-include="./header.html" class="he"></header>
+
+    <!-- 타이틀 시작 -->
+    <div class="title">
+      <div class="titlewrap">
+        <div class="title_top">
+          <h1 style="cursor: pointer" onclick="location.reload()">
+            BULLETIN BOARD
+          </h1>
+          <div class="title_top_txt">
+            <p>Please send us a message if you need any help.</p>
+          </div>
+        </div>
+      </div>
+      <div class="title_bottom"></div>
+    </div>
+
+    <!-- 컨텐츠 시작 -->
+    <div class="content_wrap">
+      <!-- 게시판 리스트 -->
+      <div class="board_wrap">
+        <div class="board_header">
+          <div class="no_searched">NO SEARCHED :(</div>
+          <div class="board_search">
+            <form role="search" method="get" class="search_form" action="/">
+              <input
+                type="search"
+                class="search_field"
+                placeholder="Search the title or name"
+              />
+              <div class="search_submit"></div>
+            </form>
+          </div>
+        </div>
+        <div class="board_body"></div>
+        <div class="board_footer">
+          <div class="current_page"></div>
+          <div class="paging-wrap">
+            <div class="paging_prev"></div>
+            <div class="paging"></div>
+            <div class="paging_next"></div>
+          </div>
+          <div class="write_btn" onclick="popupOpen()">Write</div>
+        </div>
+      </div>
+      <!-- Write btn 누르면 뜨는 팝업창 -->
+      <div class="msg_popup_wrap">
+        <div class="msg_popup">
+          <div class="msg_header">
+            <span class="popup_btn" onclick="popupOpen()"></span>
+            <h1>Send us a message!</h1>
+          </div>
+          <div class="msg_body">
+            <p class="label">Your Name</p>
+            <div id="name1" class="user_nickname"></div>
+            <label for="" class="label">Title*</label>
+            <input type="text" class="titleText" id="title" />
+            <label for="" class="label">Details*</label>
+            <textarea
+              class="details"
+              name=""
+              id="details"
+              cols="30"
+              rows="10"
+            ></textarea>
+          </div>
+          <div class="msg_footer">
+            <h3>Maple Worrior</h3>
+            <div class="submit_btn">Submit</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- title 누르면 뜨는 팝업창 -->
+      <div class="content_popup_wrap">
+        <div class="content_popup">
+          <div class="content_header">
+            <span class="popup_btn2" onclick="popupOpen2()"></span>
+            <h1 class="input_index"></h1>
+          </div>
+          <div class="content_body">
+            <p class="label">Your Name</p>
+            <div id="name2" class="user_nickname"></div>
+            <p class="label">Title</p>
+            <div class="input_title"></div>
+            <p class="label">Details</p>
+            <div class="input_details"></div>
+            <p class="label">Admin Answer</p>
+            <div class="answer_wrap">
+              <div class="user_view">
+                <div class="input_answer_user"></div>
+                <div class="delete_btn">Delete</div>
+              </div>
+              <div class="admin_view">
+                <input
+                  type="text"
+                  class="input_answer_admin"
+                  id="input_answer_admin"
+                />
+                <div class="save_btn">Save</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer data-include="./footer.html"></footer>
+  </body>
+  <script src="./js/header.js"></script>
+  <script src="./js/board.js"></script>
+  <script src="./js/signup.js"></script>
+  <script src="./js/login.js"></script>
+</html>

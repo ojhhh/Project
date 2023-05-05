@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Submit</title>
+    <link rel="stylesheet" href="./css/submit.css" />
+    <link rel="stylesheet" href="./css/login.css" />
+    <link rel="stylesheet" href="./css/home.css" />
+  </head>
+  <body>
+    <!-- 나중에 헤더 완성되면 연결하면 경로 바꾸면됨 -->
+
+    <header data-include="./header.html" class="he"></header>
+
+    <!-- 임시 헤더 영역 -->
+    <!-- <div class="headerbox"></div> -->
+    <!-- <div class="headerbox"></div> -->
+
+    <!-- 타이틀 시작 -->
+    <div class="subheader">
+      <div class="subwrap">
+        <h1>SUBMIT YOUR PHOTOS & VIDEOS</h1>
+        <p>Did you know 90% of photos & videos shared by MW were taken on a smartphone camera?</p>
+        <span>
+          Max file size: 6MB. Please save file at highest quality while staying under 6MB. Larger file? Please send via mw.com to godamcity98@gmail.com – please
+          include contact and credit information in transfer.
+        </span>
+      </div>
+    </div>
+
+    <!-- submit content start -->
+    <div class="subcon">
+      <div class="subconwrap">
+        <div class="imgupload">
+          <label for="upload">File Upload</label>
+          <input type="file" id="upload" accept="image/*" style="display: none" />
+          <!-- img에 이미지가 없을때 나오는 엑박을 안보이게 해줌 -->
+          <!-- onerror="this.style.display='none'  -->
+          <img id="pv" onerror="style.display='none'" />
+          <!-- <a href="" download=""></a> -->
+        </div>
+
+        <!-- 사진 정보 입력 -->
+        <div class="subinput">
+          <div class="subinputs">
+            <span>name*</span>
+            <input type="text" id="submitName" disabled />
+            <span>category*</span>
+            <select name="combotitle">
+              <option value="" selected disabled></option>
+              <option value="CABLE CARS">CABLE CARS</option>
+              <option value="CLASSIC FACADES">CLASSIC FACADES</option>
+              <option value="DOORS">DOORS</option>
+              <option value="EDUCATIONAL INSTITUTIONS">EDUCATIONAL INSTITUTIONS</option>
+              <option value="GOVERNMENT BUILDINGS">GOVERNMENT BUILDINGS</option>
+              <option value="HIDDEN WONDERS">HIDDEN WONDERS</option>
+              <option value="HOTEL / MOTEL">HOTEL / MOTEL</option>
+              <option value="INTERIORS">INTERIORS</option>
+              <option value="LIBRARY">LIBRARY</option>
+              <option value="LIGHTHOUSE">LIGHTHOUSE</option>
+              <option value="MUSEUM">MUSEUM</option>
+              <option value="NATURE">NATURE</option>
+
+              <option value="" disabled></option>
+
+              <option value="BLACK">BLACK</option>
+              <option value="BLUE">BLUE</option>
+              <option value="BROWN">BROWN</option>
+              <option value="GRAY">GRAY</option>
+              <option value="GREEN">GREEN</option>
+              <option value="ORANGE">ORANGE</option>
+              <option value="PINK">PINK</option>
+              <option value="PURPLE">PURPLE</option>
+              <option value="RED">RED</option>
+              <option value="TURQUOISE">TURQUOISE</option>
+              <option value="WHITE">WHITE</option>
+              <option value="YELLOW">YELLOW</option>
+            </select>
+            <span>city*</span>
+            <input type="text" />
+            <span>country*</span>
+            <input type="text" />
+            <span>title*</span>
+            <input type="text" />
+
+            <span>description*</span>
+            <input type="text" />
+          </div>
+          <div class="btnbox">
+            <div class="submitbtn" onclick="subimg()">SUBMIT</div>
+          </div>
+          <!-- <a href="이미지주소" download="파일명">
+            <img src="이미지주소" />
+          </a> -->
+        </div>
+      </div>
+    </div>
+    <!-- submit content end -->
+    <footer data-include="./footer.html"></footer>
+  </body>
+  <script src="./js/header.js"></script>
+  <script src="./js/submit.js"></script>
+  <!-- <script src="./js/stories.js"></script> -->
+  <!-- <script src="./js/localstorage.js"></script> -->
+  <!-- <script src="./js/home.js"></script> -->
+  <script src="./js/login.js"></script>
+  <script src="./js/signup.js"></script>
+</html>

@@ -1,0 +1,381 @@
+<!-- 최상단 빨간색 띠 -->
+<div class="top_banner">
+    <p class="top_banner_text">
+        Save favorites.
+        <a> Plan your next adventure</a>
+    </p>
+</div>
+
+<!-- 검색창 popup wrap -->
+<div class="search-dropdown" id="search-popup">
+    <!-- 전체 검색창 -->
+    <div class="input-search-keyword">
+        <!-- 실제로 검색하는 부분 -->
+        <div class="search-form">
+            <div class="no_img_searched">NO SEARCHED :(</div>
+            <input id="search-popup-btn" class = "keyword-input" class="search-form" placeholder="Search by location or keyword">
+            <input class= "search-icon-btn" type="" onfocus="this.blur()">
+        </div>
+        <div class="autocomplete_wrap">
+        </div>
+        <!-- 오른쪽 상단 x 표 : 전체 검색창이 나올 때, x 표도 나오게 했음. ⭐⭐ -->
+        <a id="popup-close-btn" class="close-btn"> </a>
+    </div>
+</div>
+
+<!-- 로그인 & 회원가입 popup wrap -->
+<div class="login-popup-content">
+    <!-- 로그인 창 -->
+    <div class="login_popup">
+        <button id="login-close-btn" class="login-close-btn"> x </button>
+        <h1>login</h1>
+        <div class="form">
+            <div class="txt_field">
+                <input type="text" id="username" name="username" required>
+                <span></span>
+                <label for="username">name</label>
+            </div>
+        </div>
+        <div class="form">
+            <div class="txt_field">
+                <input type="password" id="password" name="password" required>
+                <span></span>
+                <label for="password" >password</label>
+            </div>
+
+            <div class="pass">Forget password?</div>
+                <input type="submit" value="Login" id="loginButton"onclick="login()">
+            <div class="signup_link">
+                Not a member? <div class="move_to_signup">Signup</div>
+            </div>
+        </div>
+    </div>
+    <!-- 회원가입 창 -->
+    <div class="signup_popup">
+        <button id="signup-close-btn" class="login-close-btn"> x </button>
+        <h1>Sign up</h1>
+        <div class="login_link">
+            already have an account? <div class="move_to_login">Log in</div>   
+        </div>
+        <div class="continue_with">
+            <a href="https://www.google.com">CONTINUE WITH GOOGLE</a>
+            <a href="https://www.apple.com">CONTINUE WITH APPLE</a>
+        </div>
+        <div class="form">
+            <div class="txt_field">
+                <input type="text" id="nickname" required>
+                <span></span>
+                <label>nickname</label>
+            </div>
+            <div class="txt_field">
+                <input type="text" id="name" required>
+                <span></span>
+                <label >name</label>
+            </div>
+            <div class="txt_field">
+                <input type="password" id="signup_password" required>
+                <span></span>
+                <label >password</label>
+                <span class="span-position">password must be at least 8 characters</span>
+            </div>
+        </div>
+        <div class="checkbox_field">
+            <input type="checkbox" class="any">
+            "i agree to the"
+            <a href="/privacy-policy/" style="text-decoration: underline;">privacy Policy</a>"and"
+            <a href ="/terms/"style="text-decoration: underline;">terms of use</a>
+            <span class="checkmark">
+            <br>
+            <input type="checkbox" class="checkbox1">
+            "subscribe to the AWA Bi-Weekly Bulletin (ps: we will never share or seel your information to anyone under any circumstance, ever)"
+            <a href="/terms/"style="text-decoration: underline;">terms of use</a>
+            <span class="checkmark"></span>
+            <input type="submit" value="Sign up" id="signup" onclick="signup()">
+        </div>
+    </div>
+</div>
+
+<!-- 숨어있다가, 나오는 부분 : collection popup-->
+<div class="collections-dropdown">
+    <div class="collections-container">
+
+        <!-- 1) Themes -->
+        <div class="collections-item-wrapper">
+
+            <!-- 1) headline -->
+            <h3 class="collections-headline">Themes</h3>
+
+            <!-- 2) gallery -->
+            <div class="collections-gallery">
+
+                <!-- a) 아이템 01 -->
+                    <a class="collections-gallery-item" href="./collist.html">
+                        <!-- ◼ 사진 -->
+                        <img class="lazy-entered-loaded"  src="https://b2581825.smushcdn.com/2581825/wp-content/uploads/2020/04/50549683_115085609593916_1961797280330727974_n-500x500.jpg?lossy=1&strip=1&webp=1" alt="">
+                        <!-- ◼ 제목 -->
+                        <span class="collections-item-title">CABLE CARS</span>
+                    
+                    </a>
+                
+                <!-- a) 아이템 02 -->
+                    <a class="collections-gallery-item" href="./collist.html">
+                        <!-- ◼ 사진 -->
+                        <img class="lazy-entered-loaded"  src="https://b2581825.smushcdn.com/2581825/wp-content/uploads/2020/04/24838759_1472570436193554_2246699917978370048_n-500x500.jpg?lossy=1&strip=1&webp=1" alt="">
+                        <!-- ◼ 제목 -->
+                        <span class="collections-item-title">EDUCATIONAL INSTITUTIONS</span>
+                    
+                    </a>
+                
+                <!-- a) 아이템 03 -->
+                    <a class="collections-gallery-item" href="./collist.html">
+                        <!-- ◼ 사진 -->
+                        <img class="lazy-entered-loaded"  src="https://b2581825.smushcdn.com/2581825/wp-content/uploads/2020/04/30078104_1018261411661558_7719167807102910464_n-500x500.jpg?lossy=1&strip=1&webp=1" alt="">
+                        <!-- ◼ 제목 -->
+                        <span class="collections-item-title">LIBRARY</span>
+                    
+                    </a>
+                
+                <!-- a) 아이템 04 -->
+                    <a class="collections-gallery-item" href="./collist.html">
+                        <!-- ◼ 사진 -->
+                        <img class="lazy-entered-loaded"  src="https://b2581825.smushcdn.com/2581825/wp-content/uploads/2020/04/50244801_101488410904785_7804855446322858810_n-500x500.jpg?lossy=1&strip=1&webp=1" alt="">
+                        <!-- ◼ 제목 -->
+                        <span class="collections-item-title">LIGHTHOUSE</span>
+                    
+                    </a>
+                
+                <!-- a) 아이템 05 -->
+                    <a class="collections-gallery-item" href="./collist.html">
+                        <!-- ◼ 사진 -->
+                        <img class="lazy-entered-loaded"  src="https://b2581825.smushcdn.com/2581825/wp-content/uploads/2020/04/75332701_230779857889483_5510500287028109061_n-500x500.jpg?lossy=1&strip=1&webp=1" alt="">
+                        <!-- ◼ 제목 -->
+                        <span class="collections-item-title">DOORS</span>
+                    
+                    </a>
+                
+                <!-- a) 아이템 06 -->
+                    <a class="collections-gallery-item" href="./collist.html">
+                        <!-- ◼ 사진 -->
+                        <img class="lazy-entered-loaded"  src="https://b2581825.smushcdn.com/2581825/wp-content/uploads/2020/04/23595073_1689113034433739_1346042720501628928_n-500x500.jpg?lossy=1&strip=1&webp=1" alt="">
+                        <!-- ◼ 제목 -->
+                        <span class="collections-item-title">CLASSIC FACADES</span>
+                    
+                    </a>
+                
+                
+
+
+
+
+
+            </div>
+
+            <!-- 3) see all 버튼 -->
+            <a class="see-all-btn" href="./collections.html">
+                See all
+            </a>
+
+
+        </div> 
+
+        <!-- 2) color palettes -->
+        <div class="collections-item-wrapper">
+
+            <!-- 1) headline -->
+            <h3 class="collections-headline">Color Palettes</h3>
+
+            <!-- 2) gallery -->
+            <div class="collections-gallery">
+
+            <!-- a) 아이템 01 -->
+                <a class="collections-gallery-item" href="./collist.html">
+                    <!-- ◼ 사진 -->
+                    <img class="lazy-entered-loaded"  src="https://b2581825.smushcdn.com/2581825/wp-content/uploads/2020/05/90086492_938096936642763_5437379437826734322_n-500x500.jpg?lossy=1&strip=1&webp=1" alt="">
+                    <!-- ◼ 제목 -->
+                    <span class="collections-item-title">GREEN</span>
+                
+                </a>
+            
+            <!-- a) 아이템 01 -->
+                <a class="collections-gallery-item" href="./collist.html">
+                    <!-- ◼ 사진 -->
+                    <img class="lazy-entered-loaded"  src="https://b2581825.smushcdn.com/2581825/wp-content/uploads/2020/04/26070394_131546737646213_8637264551781335040_n-500x500.jpg?lossy=1&strip=1&webp=1" alt="">
+                    <!-- ◼ 제목 -->
+                    <span class="collections-item-title">PINK</span>
+                
+                </a>
+            
+            <!-- a) 아이템 01 -->
+                <a class="collections-gallery-item" href="./collist.html">
+                    <!-- ◼ 사진 -->
+                    <img class="lazy-entered-loaded"  src="https://b2581825.smushcdn.com/2581825/wp-content/uploads/2020/04/64961088_951069728396673_7248425327418930885_n-500x500.jpg?lossy=1&strip=1&webp=1" alt="">
+                    <!-- ◼ 제목 -->
+                    <span class="collections-item-title">ORANGE</span>
+                
+                </a>
+            
+            <!-- a) 아이템 01 -->
+                <a class="collections-gallery-item" href="./collist.html">
+                    <!-- ◼ 사진 -->
+                    <img class="lazy-entered-loaded"  src="https://b2581825.smushcdn.com/2581825/wp-content/uploads/2020/04/78918357_454329888812771_7390690440755563381_n-500x500.jpg?lossy=1&strip=1&webp=1" alt="">
+                    <!-- ◼ 제목 -->
+                    <span class="collections-item-title">TURQUOISE</span>
+                
+                </a>
+            
+            <!-- a) 아이템 01 -->
+                <a class="collections-gallery-item" href="./collist.html">
+                    <!-- ◼ 사진 -->
+                    <img class="lazy-entered-loaded"  src="https://b2581825.smushcdn.com/2581825/wp-content/uploads/2020/04/8d06ca59-500x500.jpeg?lossy=1&strip=1&webp=1" alt="">
+                    <!-- ◼ 제목 -->
+                    <span class="collections-item-title">BLUE</span>
+                
+                </a>
+            
+            <!-- a) 아이템 01 -->
+                <a class="collections-gallery-item" href="./collist.html">
+                    <!-- ◼ 사진 -->
+                    <img class="lazy-entered-loaded"  src="https://b2581825.smushcdn.com/2581825/wp-content/uploads/2020/04/22429704_133661504049431_4455231951950839808_n-500x500.jpg?lossy=1&strip=1&webp=1" alt="">
+                    <!-- ◼ 제목 -->
+                    <span class="collections-item-title">BLACK</span>
+                
+                </a>
+            
+            
+
+
+
+
+
+            </div>
+
+        <!-- 3) see all 버튼 -->
+            <a class="see-all-btn" href="./collections.html">
+                See all
+            </a>
+
+
+        </div>
+        
+
+
+    </div>
+</div>
+
+<!-- header -->
+<header class="site_header">
+
+    <!-- ◼ 반응형 | width 1200 이하 일 때, > 오른쪽 햄버거 메뉴 -->
+    <div class="responsive-hamburg-menu">
+        <a class="hamburg-menu-button"> 
+            <span> </span>
+            <span> </span>
+            <span> </span>
+        </a>
+    </div>
+
+    <div class="site_header__top">
+         <!-- search 누르면 나오는 영역 -->
+        <div class="site_header__top_search">      
+        </div>
+        <!-- MW logo 영역 -->
+        <div class="site_header__top_logo"> 
+
+            <a class="dropdown-search-form-xWidth-under1200">
+                <img src="https://accidentallywesanderson.com/wp-content/themes/awa/assets/images/icon-search-red.svg" alt="">
+            </a>
+
+            <!-- MW logo -->
+            <a href="./home.html" class="a_tag">
+                <img class="img_tag" src="./img/mw-nav-logo.png" alt="Accidentally Wes Anderson Logo">
+            </a>
+
+            <!-- ◼ 햄버거 메뉴 -->
+            <div class="responsive-hamburg-menu-xWidth-under1200">
+                <a class="hamburg-menu-button" id="hamburg-menu-btn-under1200"> 
+                    <span> </span>
+                    <span> </span>
+                    <span> </span>
+                </a>
+            </div>
+
+            <!-- ◼ 취소 버튼  --> 
+            <a class="close-state-button">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+            
+        </div>
+    </div>
+    
+    <!-- nav bar 영역 -->
+    <div class="site_header__primary-nav"> 
+
+        <!-- ◼ 반응형 | Y 스크롤 다운시 나타나는 로고 -->
+        <div class="responsive-top-logo">
+            <a href="/" class="a_tag">
+                <img class="img_tag" src="https://accidentallywesanderson.com/wp-content/themes/awa/assets/images/awa-logo-collapsed.svg" alt="Accidentally Wes Anderson Logo">
+            </a>
+        </div>
+
+        <!-- (왼쪽) 인스타그램 & 페이스북 -->
+        <div class="site_header__primary-nav--social">
+            <a href="https://www.instagram.com/accidentallywesanderson/">
+                <img src="https://accidentallywesanderson.com/wp-content/themes/awa/assets/images/icon-ig-red.svg" alt="">
+            </a>
+            <a href="https://www.facebook.com/accidentallywesanderson/">
+                <img src="https://accidentallywesanderson.com/wp-content/themes/awa/assets/images/icon-fb-red.svg" alt="">
+            </a>
+        </div>
+
+        <!-- (중앙) nav bar -->
+        <div class="site_header__primary-nav--menus">
+            <ul class="nav_menus">
+                <li>
+                    <a class="nav-collections-btn" href="#"> Collections</a>
+                </li>
+                <li>
+                    <a href="./storiese.html">Stories</a>
+                </li>
+                <li>
+                    <a onclick="loginCheck3()">Submit</a>
+                </li>
+                <li>
+                    <a onclick="loginCheck1()">MyPage</a>
+                </li>
+                <li>
+                    <a onclick="loginCheck2()">Board</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- (오른쪽) search & login -->
+        <div class="site_header__primary-nav--seachlogin">
+            <a id="dropdown-search-form">
+                <img src="https://accidentallywesanderson.com/wp-content/themes/awa/assets/images/icon-search-red.svg" alt="">
+                Search
+            </a>
+            <a id="id-login-btn">
+                <img src="https://accidentallywesanderson.com/wp-content/themes/awa/assets/images/icon-user-red.svg" alt="">
+                Login
+            </a>
+        </div>
+
+        <!-- ◼ 반응형 검색버튼 : 평소에 없다가 나타나야 함. 평소에 있는 검색바랑 구별되야 함  -->
+        <div class="respon-search-form-x1200under-yscroll200over">
+            <a id="dropdown-search-form-x1200under-y200over" class="dropdown-search-form">
+                <img src="https://accidentallywesanderson.com/wp-content/themes/awa/assets/images/icon-search-red.svg" alt="">
+            </a>
+        </div>
+
+        <!-- ◼ 반응형 | width 1200 이하 + y스크롤 200 이상일 때  > 오른쪽 햄버거 메뉴 -->
+        <div class="responsive-hamburg-menu-xwidth1200-yscroll200">
+            <a class="hamburg-menu-button"> 
+                <span> </span>
+                <span> </span>
+                <span> </span>
+            </a>
+        </div>        
+    </div>
+</header>

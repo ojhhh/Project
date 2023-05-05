@@ -1,0 +1,333 @@
+/* @media screen and (min-width: 1240px) {
+  .storiesmain {
+    width: 1240px;
+  }
+  .stmain_lt {
+    width: 744px;
+  }
+  .stmain_rt {
+    width: 496px;
+  }
+  img {
+    width: 744px;
+  }
+} */
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  /* background-color: #f8f3e4; */
+}
+.headerbox {
+  width: 100%;
+  height: 210px;
+  background-color: black;
+}
+
+/* stories 상단 이미지 부분 */
+.storieswrap {
+  padding: 50px 0;
+}
+
+.storieswrap .storiesmain {
+  height: auto;
+  padding: 0 72px;
+  margin: 0 auto;
+  display: flex;
+}
+.storieswrap .storiesmain .stmain_lt {
+  width: 60%;
+  height: 400px;
+}
+.storieswrap .storiesmain .stmain_lt img {
+  background-image: url("https://b2581825.smushcdn.com/2581825/wp-content/uploads/2023/04/332625631_938902900464824_7879003155680889548_n-e1681240301869.jpg?lossy=1&strip=1&webp=1");
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: 50% 50%;
+}
+.storieswrap .storiesmain .stmain_rt {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 0 20px 40px;
+}
+
+.stmain_rt span {
+  color: #ee3024;
+  text-decoration: none;
+  font-size: 16px;
+  width: 60px;
+}
+
+.stmain_rt a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #ee3024;
+  transform-origin: bottom left;
+  transition: transform 0.25s ease-out;
+}
+
+.stmain_rt a:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+.stmain_rt h2 {
+  color: #3e4240;
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+.stmain_rt .rmbtn {
+  color: #ee3024;
+  font-size: 14px;
+  width: 160px;
+  height: 30px;
+  border: 2px solid #ee3024;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.stmain_rt .rmbtn:hover {
+  background-color: #ee3024;
+  color: white;
+  transition: 1s;
+}
+
+/* stories 상단 이미지 부분 끝 */
+
+/* stories 이미지 출력 부분 */
+.storiesimgs {
+  background-color: #f8f3e4;
+  width: 100%;
+  height: auto;
+  /* border: 1px solid; */
+  padding: 40px 0 80px;
+}
+.storiesimgs .storiescontent {
+}
+.storiesimgs .storiescontent .contenttab {
+  padding: 0 72px;
+  margin: 20px 0 5px;
+}
+.storiesimgs .storiescontent .contenttab .tab01,
+.tab02,
+.tab03,
+.tab04,
+.tab05,
+.tab06,
+.tab07 {
+  margin: 0 30px 5px 0;
+  color: #ee3024;
+  font-size: 18px;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+}
+.contenttab .tab01::after,
+.tab02::after,
+.tab03::after,
+.tab04::after,
+.tab05::after,
+.tab06::after,
+.tab07::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: #ee3024;
+  transform-origin: bottom left;
+  transition: transform 0.25s ease-out;
+}
+
+.contenttab .tab01:hover::after,
+.tab02:hover::after,
+.tab03:hover::after,
+.tab04:hover::after,
+.tab05:hover::after,
+.tab06:hover::after,
+.tab07:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.imgs {
+  padding: 0 72px;
+  /* border: 1px solid; */
+}
+.imgs .imgcards {
+  display: flex;
+  flex-wrap: wrap;
+}
+.imgs .imgcards .imgcard {
+  width: 25%;
+  padding: 10px 12px;
+  margin-bottom: 20px;
+  /* border: 1px solid; */
+  position: relative;
+}
+.imgcardin {
+  /* height: 420px; */
+  height: 100%;
+  /* border: 1px solid; */
+  background-color: white;
+  border-radius: 10px;
+  position: relative;
+}
+
+.imgcardin:hover {
+  box-shadow: 2px 2px 7px 0 rgba(0, 0, 0, 0.2);
+  transform: translate(-1px, -1px);
+}
+
+.imgcardin .cardimg {
+  width: 100%;
+  aspect-ratio: 1/1;
+  /* background-image: url("https://accidentallywesanderson.com/wp-content/uploads/2023/04/catbirrd-800x800.jpg"); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  display: flex;
+  align-items: flex-end;
+}
+.imgcardin .cardimg > img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+}
+.imgcardin .imgbtm {
+  width: 100%;
+  height: 40px;
+  background-color: #fad0c3;
+  padding: 8px 15px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imgbtm .imgbtmtxt {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imgbtm .imgbtmtxt span {
+  font-size: 10px;
+}
+.imgbtm .imgbtmtxt img {
+  width: 70px;
+  margin-left: 10px;
+  max-height: 25px;
+}
+
+.cardtxtbox {
+  width: 100%;
+  padding: 20px 15px 40px;
+}
+.cardtxtbox .cardtxt {
+}
+.cardtxtbox .cardtxt a {
+  font-size: 16px;
+  color: #3e4240;
+  text-decoration: none;
+}
+.cardtxtbox .cardtxt ~ p {
+  margin: 15px 0 0;
+  font-size: 8px;
+  line-height: 16px;
+  letter-spacing: 0.02px;
+  color: #3e4240;
+}
+.cardtxtbox .cardtxt p:last-child {
+  margin: 0;
+  color: #ee3024;
+  font-size: 10px;
+  position: absolute;
+  left: 15px;
+  bottom: 10px;
+}
+
+@media screen and (max-width: 420px) {
+  .imgs {
+    padding: 0 10px;
+  }
+  .storiesimgs .storiescontent .contenttab {
+    padding: 0 20px;
+  }
+  .imgs .imgcards .imgcard {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 767px) and (min-width: 421px) {
+  .imgs {
+    padding: 0 10px;
+  }
+  .storiesimgs .storiescontent .contenttab {
+    padding: 0 20px;
+  }
+  .imgs .imgcards .imgcard {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .storieswrap .storiesmain {
+    display: block;
+    padding: 0 25px;
+  }
+  .storieswrap .storiesmain .stmain_lt {
+    width: 100%;
+  }
+  .storieswrap .storiesmain .stmain_rt {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1040px) and (min-width: 768px) {
+  .imgs {
+    padding: 0 20px;
+  }
+  .imgs .imgcards .imgcard {
+    width: 33.33333%;
+  }
+  .storiesimgs .storiescontent .contenttab {
+    padding: 0 30px;
+  }
+}
+@media screen and (max-width: 1500px) and (min-width: 1041px) {
+  .imgs {
+    padding: 0 20px;
+  }
+  .storiesimgs .storiescontent .contenttab {
+    padding: 0 30px;
+  }
+}
+@media screen and (max-width: 1500px) {
+  .storieswrap .storiesmain {
+    padding: 0 25px;
+  }
+}
+
+/* stories 이미지 출력 부분 끝 */

@@ -1,0 +1,173 @@
+@font-face {
+  font-family: "freightsanproblack";
+  src: url("./font/FreightSansProBlack-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "freightsanprobold";
+  src: url("./font/FreightSansProBold-Regular.ttf") format("truetype");
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+.headerbox {
+  width: 100%;
+  height: 210px;
+  background-color: black;
+}
+
+/* 타이틀 시작 */
+.title {
+  height: auto;
+  padding: 20px 70px;
+}
+.title .titlewrap {
+  height: auto;
+  border-bottom: 1px solid #63252a;
+  padding: 10px 0;
+}
+.title .titlewrap .title_top {
+  height: auto;
+  margin: 0 auto;
+}
+.title .titlewrap .title_top h1 {
+  font-size: 54px;
+  margin: 0 0 20px;
+  font-family: "freightsanprobold";
+}
+.title .titlewrap .title_top .title_top_txt {
+  width: 700px;
+  height: auto;
+  padding: 0 40px 0 0;
+}
+
+.title_top .title_top_txt p {
+  font-size: 16px;
+}
+
+.title .title_bottom {
+}
+.title .title_bottom .line {
+}
+.title .title_bottom .title_bottom_txt {
+  padding-top: 15px;
+  font-size: 18px;
+  color: #63252a;
+}
+
+.title .title_bottom .title_bottom_txt a {
+  position: relative;
+  list-style: none;
+  text-decoration: none;
+  color: #63252a;
+}
+.title .title_bottom .title_bottom_txt a:hover {
+  color: #ee3024;
+}
+
+.title .title_bottom .title_bottom_txt a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #ee3024;
+  transform-origin: bottom left;
+  transition: transform 0.25s ease-out;
+}
+
+.title .title_bottom .title_bottom_txt a:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* 타이틀 끝 */
+
+/* 컨텐츠 시작 */
+.content_wrap {
+  background-color: #f8f3e4;
+  padding: 32px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.card {
+  width: 25%;
+  transition: 0.25s;
+  padding: 10px 10px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+@media screen and (max-width: 420px) {
+  .card {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 700px) and (min-width: 421px) {
+  .card {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 1150px) and (min-width: 701px) {
+  .card {
+    width: 33.333333%;
+  }
+}
+
+.card .cardin {
+  /* height: 460px; */
+  height: 100%;
+  background-color: white;
+  border-radius: 20px;
+  position: relative;
+}
+
+.card .cardcover {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0);
+  position: absolute;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+
+.cardcover:hover {
+  box-shadow: 2px 2px 7px 0 rgba(0, 0, 0, 0.2);
+  transform: translate(-1px, -1px);
+  cursor: pointer;
+}
+.cardcover:hover .cardin {
+  box-shadow: 2px 2px 7px 0 rgba(0, 0, 0, 0.2);
+  transform: translate(-1px, -1px);
+  cursor: pointer;
+}
+.card .cardin:hover {
+  box-shadow: 2px 2px 7px 0 rgba(0, 0, 0, 0.2);
+  transform: translate(-1px, -1px);
+  cursor: pointer;
+}
+.card .cardin img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 20px 20px 0 0;
+}
+.cardtxt {
+  /* height: 100%; */
+  padding: 0 15px 40px;
+}
+.cardtxt h4 {
+  margin: 10px 0 5px;
+}
+.cardtxt h2 {
+  font-weight: 400;
+  margin: 0 0 15px;
+}
+
+.cardtxt p {
+  font-size: 10px;
+}
+/* 컨텐츠 끝 */

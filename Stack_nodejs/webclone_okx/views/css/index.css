@@ -1,0 +1,143 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* nav start */
+.nav {
+  width: 100vw;
+  height: 50px;
+  border-bottom: 2px solid;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  background-color: black;
+}
+
+.nav .logo {
+  width: 100px;
+  height: 100%;
+  border: 1px solid;
+  background-color: #fff;
+}
+
+.nav .change {
+  width: 150px;
+  height: 100%;
+  border: 1px solid;
+  background-color: #fff;
+  margin-left: 20px;
+}
+
+.nav .change .change_lt {
+}
+.nav .change .change_rt {
+}
+
+.nav ul {
+  display: flex;
+}
+.nav li {
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav li span {
+  cursor: pointer;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.nav .nav_buy {
+  width: 110px;
+  display: flex;
+}
+
+.nav .nav_dis {
+  display: flex;
+  width: 100px;
+}
+
+.nav .nav_trade {
+  display: flex;
+  width: 80px;
+}
+
+.nav .nav_build {
+  display: flex;
+  width: 80px;
+}
+
+.nav .nav_ins {
+  display: flex;
+  width: 120px;
+}
+
+.nav .nav_learn {
+  display: flex;
+  width: 60px;
+}
+
+.nav .nav_more {
+  display: flex;
+  width: 70px;
+}
+
+.nav .nav_buy .arw,
+.nav .nav_dis .arw,
+.nav .nav_trade .arw,
+.nav .nav_build .arw,
+.nav .nav_ins .arw,
+.nav .nav_learn .arw,
+.nav .nav_more .arw {
+  margin-left: 5px;
+  background-color: #fff;
+  height: 100%;
+  aspect-ratio: 1/1;
+  /* background-image: url("./img/angle-up-solid.svg"); */
+}
+
+.nav .nav_null {
+  width: 100px;
+}
+
+.nav .sign_wrap {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  height: 100%;
+}
+
+.nav .sign_wrap .login,
+.nav .sign_wrap .signup {
+  width: 60px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav .sign_wrap .login {
+  margin-right: 10px;
+}
+.nav .sign_wrap .signup {
+  border: 2px solid #fff;
+  border-radius: 20px;
+}
+
+.nav .signup {
+}
+/* nav end */
+
+/* body start */
+.main {
+  position: fixed;
+  width: 100vw;
+  height: 100%;
+  background-color: antiquewhite;
+}
+/* body end */

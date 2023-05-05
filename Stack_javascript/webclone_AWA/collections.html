@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Collections</title>
+    <link rel="stylesheet" href="./css/collections.css" />
+    <link rel="stylesheet" href="./css/home.css" />
+    <link rel="stylesheet" href="./css/login.css" />
+  </head>
+  <body>
+    <!-- 나중에 헤더 완성되면 연결하면 경로 바꾸면됨 -->
+    <header data-include="./header.html" class="he"></header>
+    <!-- 임시 헤더 영역 -->
+    <!-- <div class="headerbox"></div> -->
+    <!-- <div class="headerbox"></div> -->
+
+    <!-- COLLECTIONS 페이지 상단 -->
+    <div class="titlewrap">
+      <div class="titlewrapin">
+        <h1>COLLECTIONS</h1>
+      </div>
+    </div>
+
+    <!-- THEMES, COLOR PALETTE -->
+    <div class="colcontainer">
+      <!-- 상단 버튼  -->
+      <div class="coltabwrap">
+        <div class="coltab">
+          <div class="themes" onclick="tm()">THEMES</div>
+          <div class="colorpalette" onclick="cp()">COLOR PALETTE</div>
+        </div>
+      </div>
+      <!-- 이미지 출력 부분 -->
+      <div class="colcardwrap">
+        <!-- COLOR PALETTE BLACK -->
+        <div class="colcard">
+          <div class="colcardin">
+            <!-- <div class="colcardcover"></div> -->
+            <a href="./collist.html">
+              <img
+                src="https://b2581825.smushcdn.com/2581825/wp-content/uploads/2020/04/22429704_133661504049431_4455231951950839808_n-800x699.jpg"
+                alt=""
+              />
+              <div class="gradation">
+                <h4>BLACK</h4>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer data-include="./footer.html"></footer>
+  </body>
+  <script src="./js/header.js"></script>
+  <script src="./js/collections.js"></script>
+  <!-- <script src="./js/localstorage.js"></script> -->
+  <!-- <script src="./js/home.js"></script> -->
+  <script src="./js/login.js"></script>
+  <script src="./js/signup.js"></script>
+</html>

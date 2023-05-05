@@ -1,0 +1,196 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  /* background-color: #f8f3e4; */
+}
+.headerbox {
+  width: 100%;
+  height: 210px;
+  background-color: black;
+}
+
+/* 페이지 상단 타이틀 부분 */
+.titlewrap {
+  padding: 50px 0;
+}
+.titlewrap .titlewrapin {
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.titlewrap .titlewrapin h1 {
+  font-size: 60px;
+  list-style: 62px;
+  margin: 0;
+  color: #231f20;
+  text-align: center;
+}
+/* 페이지 상단 타이틀 부분 끝 */
+
+/* THEMES, COLOR PALETTE */
+.colcontainer {
+  padding: 0 20px;
+}
+.colcontainer .coltabwrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.colcontainer .coltabwrap .coltab {
+  display: flex;
+  border: 1px solid #ee3024;
+  border-radius: 30px;
+}
+
+.coltab .themes,
+.coltab .colorpalette {
+  width: 200px;
+  height: 50px;
+  border: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  color: #ee3024;
+  font-weight: 900;
+  cursor: pointer;
+}
+.themes.addborder,
+.colorpalette.addborder {
+  border: 2px solid #ee3024;
+  transition: all 0.25s ease;
+}
+
+.colcontainer .colcardwrap {
+  display: flex;
+  flex-wrap: wrap;
+  cursor: pointer;
+}
+
+.colcard {
+  width: 25%;
+  aspect-ratio: 1/1;
+  padding: 10px;
+  transition: 0.25s;
+  position: relative;
+}
+@media screen and (max-width: 420px) {
+  .colcard {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 700px) and (min-width: 421px) {
+  .colcard {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 1150px) and (min-width: 701px) {
+  .colcard {
+    width: 33.333333%;
+  }
+}
+
+.colcard:hover {
+  transform: scale(0.98);
+}
+.colcard:hover .colcardin .gradation {
+  height: 100%;
+}
+
+.colcard:hover .colcardin .gradation h4 {
+  font-size: 30px;
+}
+
+.colcard .colcardin {
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.colcard .colcardin .colcardcover {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+}
+.colcard .colcardin img {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  border-radius: 10px;
+}
+
+.colcardin .gradation {
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-radius: 10px;
+  background-image: linear-gradient(
+    180deg,
+    rgba(84, 108, 136, 0),
+    rgba(84, 108, 136, 0.22) 55%,
+    rgba(0, 0, 0, 0.7)
+  );
+  transition: 0.25s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.colcardin .gradation:hover {
+  height: 100%;
+}
+/* .colcardin .gradation h4 {
+  color: white;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  transition: 0.25s;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: 0.25s;
+  position: absolute;
+} */
+/* 
+.gradation h4 {
+  color: white;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  transition: 0.25s;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: 0.25s;
+  position: absolute;
+  top: 50%;
+  bottom: 50%;
+  transform: translateY(-50%);
+} */
+.colcardin .gradation h4 {
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  transition: 0.25s;
+  /* position: absolute; */
+  margin: 0 auto;
+}
+
+/* THEMES, COLOR PALETTE end */

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>myPage</title>
+    <link rel="stylesheet" href="./css/myPage.css" />
+    <link rel="stylesheet" href="./css/login.css" />
+    <link rel="stylesheet" href="./css/home.css" />
+  </head>
+  <body>
+    <!-- 나중에 헤더 완성되면 연결하면 경로 바꾸면됨 -->
+    <header data-include="./header.html" class="he"></header>
+
+    <!-- 임시 헤더 영역 -->
+    <!-- <div class="headerbox"></div> -->
+
+    <div class="content_wrap">
+      <div class="profile_wrap">
+        <div class="profile">
+          <!-- 프로필 판넬 -->
+          <div class="profile_panel">
+            <div class="profile_panel_uphead">PROFILE</div>
+
+            <div class="profile_panel_header">
+              <div class="profile_img">
+                <img src="./img/default-profile-photo.webp" alt="" />
+              </div>
+              <h2 class="profile_nickname">nickname</h2>
+              <h4 class="profile_name">name</h4>
+              <p class="profile_date">Adventurer since April 2023</p>
+            </div>
+            <div class="profile_panel_body">
+              <div class="profile_edit" onclick="popupOpen()">EDIT PROFILE</div>
+              <div class="profile_settings" onclick="popupOpen2()">
+                SETTINGS
+              </div>
+            </div>
+            <div class="profile_panel_footer">
+              <h4 class="profile_badges">BADGES</h4>
+              <div class="badge_item">
+                <div class="badge_item_img">
+                  <img src="./img/badge-armchair.svg" alt="" />
+                </div>
+                <h5 class="badge_item_title">Armchair Explorer</h5>
+                <p class="badge_item_description">
+                  Check back soon for more badges!
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- 사용자가 업로드한 사진 보여주는 부분 -->
+          <div class="profile_content">
+            <div class="profile_content_header">COLLECTIONS</div>
+            <div class="profile_content_list">
+              <!-- myImg 들어가는 부분 -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 프로필 수정 팝업 -->
+      <div class="edit_popup_wrap">
+        <div class="edit_popup">
+          <span class="popup_btn" onclick="popupOpen()"></span>
+          <div class="edit_popup_header">
+            <h2 style="font-size: 28px">Edit profile</h2>
+            <p>Save your favorite places and add your own photos to the map!</p>
+            <div class="profile_img">
+              <img src="./img/default-profile-photo.webp" alt="" />
+            </div>
+          </div>
+          <div class="edit_popup_body">
+            <label for="" class="label">Nickname</label>
+            <input type="text" class="edit_nickname" id="edit_nickname" />
+            <label for="" class="label">Your Name</label>
+            <input type="text" class="edit_name" id="edit_name" disabled />
+            <label for="" class="label">Introduction</label>
+            <textarea
+              class="edit_introduction"
+              name=""
+              id="edit_introduction"
+              cols="30"
+              rows="10"
+            ></textarea>
+
+            <div class="save_btn"><span>SAVE CHANGES</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 세팅(계정삭제) 팝업 -->
+      <div class="settings_popup_wrap">
+        <div class="settings_popup">
+          <span class="popup_btn" onclick="popupOpen2()"></span>
+          <div class="settings_popup_header">
+            <img src="./img/awa-hat.svg" alt="" />
+            <h2>Delete your MW Account</h2>
+          </div>
+          <div class="settings_popup_body">
+            <h3>Warning: this cannot be undone.</h3>
+            <div class="delete_form">
+              <label for="check1" class="checkbox_label">
+                All Favorites will be removed from your account.
+                <input
+                  type="checkbox"
+                  id="check1"
+                  name="delete_profile"
+                  value="1"
+                />
+                <span class="checkmark"></span>
+              </label>
+              <label for="check2" class="checkbox_label">
+                You will have to create a new account if you change your mind
+                later.
+                <input
+                  type="checkbox"
+                  id="check2"
+                  name="delete_profile"
+                  value="1"
+                />
+                <span class="checkmark"></span>
+              </label>
+              <div class="delete_btn"><span>DELETE MY PROFILE</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer data-include="./footer.html"></footer>
+  </body>
+  <script src="./js/header.js"></script>
+  <script src="./js/myPage.js"></script>
+  <!-- <script src="./js/localstorage.js"></script> -->
+  <script src="./js/home.js"></script>
+  <script src="./js/login.js"></script>
+  <script src="./js/signup.js"></script>
+</html>
+</html>
