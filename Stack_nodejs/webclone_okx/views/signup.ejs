@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/signup.css" />
+    <title>signup</title>
+  </head>
+  <body>
+    <%- include('nav.ejs') %>
+    <div class="signup_wrap">
+      <div class="signup_lt">
+        <div class="banner">
+          <div class="title">
+            <h1>Trade with confidence</h1>
+            <p>
+              Your funds are always backed 1:1 on OKX with our regularly
+              published audits on our Proof of Reserves
+            </p>
+          </div>
+          <img
+            src="https://static.okx.com/cdn/assets/imgs/235/83BA63BBE0F23B64.png"
+            alt=""
+          />
+          <div class="community">
+            <span>Join our Telegram group</span>
+            <p>
+              Ask questions, get answers, and chat with other traders to shape
+              the crypto future together
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- signup form -->
+      <div class="signup_rt">
+        <div class="signup_container">
+          <h1>Create account</h1>
+          <form action="/signup" method="post">
+            <div class="tabs">
+              <ul>
+                <li>Email / Sub-account</li>
+              </ul>
+              <input type="text" name="user_id" />
+              <span>Password</span>
+              <input type="text" name="user_pw" />
+              <span>Password</span>
+              <input type="text" name="user_pw_chk" />
+              <button>Sign up</button>
+            </div>
+          </form>
+          <div class="signtxt">
+            <span>Already have an account?</span>
+            <a href="/signup"> Log in </a>
+          </div>
+          <div class="signup_other">
+            <span>or log in with</span>
+          </div>
+          <div class="signup_site">
+            <div class="telegram">
+              <div class="tel_logo">
+                <i class="tgme_widget_login_button_icon"></i>
+              </div>
+              <div class="tel_txt">Telegram</div>
+            </div>
+            <div class="google">
+              <div class="goo_logo"></div>
+              <div class="goo_txt">Google</div>
+            </div>
+          </div>
+          <div class="lasttxt">
+            <p>By creating an account, I agree to OKX</p>
+            <a href=""> terms of service</a>
+            <p>and</p>
+            <a href="">privacy policy</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

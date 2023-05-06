@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/login.css" />
+  </head>
+  <body>
+    <%- include('nav.ejs') %>
+    <!-- login -->
+    <div class="login_wrap">
+      <div class="login_lt">
+        <div class="banner">
+          <div class="title">
+            <h1>Trade with confidence</h1>
+            <p>
+              Your funds are always backed 1:1 on OKX with our regularly
+              published audits on our Proof of Reserves
+            </p>
+          </div>
+          <img
+            src="https://static.okx.com/cdn/assets/imgs/235/83BA63BBE0F23B64.png"
+            alt=""
+          />
+          <div class="community">
+            <span>Join our Telegram group</span>
+            <p>
+              Ask questions, get answers, and chat with other traders to shape
+              the crypto future together
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- login form -->
+      <div class="login_rt">
+        <div class="login_container">
+          <h1>Log in</h1>
+          <form action="/login" method="post">
+            <div class="tabs">
+              <ul>
+                <li>Email / Sub-account</li>
+                <!-- <li>Phone</li>
+                <li>QR code</li> -->
+              </ul>
+              <input type="text" name="user_id" />
+              <span>Password</span>
+              <input type="text" name="user_pw" />
+              <button>Log in</button>
+            </div>
+          </form>
+          <div class="signtxt">
+            <span>Don't have an account?</span>
+            <a href="/signup"> Sign up </a>
+          </div>
+          <div class="login_other">
+            <span>or log in with</span>
+          </div>
+          <div class="login_site">
+            <div class="telegram">
+              <div class="tel_logo">
+                <i class="tgme_widget_login_button_icon"></i>
+              </div>
+              <div class="tel_txt">Telegram</div>
+            </div>
+            <div class="google">
+              <div class="goo_logo"></div>
+              <div class="goo_txt">Google</div>
+            </div>
+          </div>
+          <div class="lasttxt">
+            <p>
+              This site is protected by Google reCAPTCHA to ensure you're not a
+              bot.
+            </p>
+            <a href=""> Learn more</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
