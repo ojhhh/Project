@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>main page</title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <%- include('header.ejs') %>
+    <!-- header start -->
+    <!-- <div class="header">
+      <div class="header_wrap">
+        <div class="logo"><a href="#"> tistory borad</a></div>
+        <div class="sign">
+          <a href="/login">login</a>
+          <a href="/signup">signup</a>
+        </div>
+      </div>
+    </div> -->
+    <!-- header end -->
+
+    <!-- container start -->
+    <div class="container">
+      <div class="container_title">
+        <div class="title_wrap">
+          <h2>전체 글</h2>
+          <span>10</span>
+          <p><a href="/tistory">+</a></p>
+        </div>
+      </div>
+      <div class="container_wrap">
+        <div class="container_lt">
+          <!-- boardlist start -->
+          <a href="/tistory/view">
+            <div class="boardlist">
+              <div class="content">
+                <div class="title">
+                  <span>[Nodejs] toy project</span>
+                </div>
+                <div class="text">
+                  <p>
+                    abcdefghijklmnoprstuvwxyz<br />
+                    asldjfkalsdjflksadjfklasjfkl;sadjf
+                  </p>
+                </div>
+                <div class="cate">
+                  <span>Nodejs</span>
+                  <p>2023.05.09</p>
+                </div>
+              </div>
+              <div class="content_img">
+                <img
+                  src="https://cdn.pixabay.com/photo/2015/04/23/17/41/node-js-736399_1280.png"
+                  alt=""
+                />
+              </div>
+            </div>
+          </a>
+
+          <!-- boardlist end -->
+        </div>
+        <!-- rt start -->
+        <%- include('./rt.ejs') %>
+        <!-- <div class="container_rt">
+          <div class="profile">
+            <div class="profile_img"></div>
+          </div>
+          <div class="category">
+            <div class="category_wrap">
+              <ul>
+                <li><a href="/tistory">viewAll</a></li>
+                <li><a href="/tistory">Javascript</a></li>
+                <li><a href="/tistory">GIT</a></li>
+                <li><a href="/tistory">CSS</a></li>
+                <li><a href="/tistory">HTML</a></li>
+                <li><a href="/tistory">Nodejs</a></li>
+                <li><a href="/tistory">MySQL</a></li>
+              </ul>
+            </div>
+          </div>
+        </div> -->
+        <!-- rt end -->
+      </div>
+    </div>
+    <!-- container end -->
+
+    <%- include('footer.ejs') %>
+    <!-- footer start -->
+    <!-- <div class="footer">
+      <div class="footer_wrap">
+        <span>Copyright © Kakao Corp. All rights reserved.</span>
+      </div>
+    </div> -->
+    <!-- footer end -->
+  </body>
+</html>
