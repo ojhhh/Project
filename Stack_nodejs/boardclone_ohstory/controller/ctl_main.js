@@ -10,12 +10,12 @@ exports.SignUp = async function (user_id, user_pw) {
   }
 };
 
-exports.LogIn = async function (user_id, user_pw) {
+exports.UserChk = async function (user_id) {
   try {
-    const data = await boardfunc.Login(user_id, user_pw);
+    const data = await boardfunc.userChk(user_id);
     return data[0];
   } catch (error) {
-    console.log("controller LogIn error");
+    console.log("controller UserChek error");
     console.error(error);
   }
 };

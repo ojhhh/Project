@@ -3,7 +3,7 @@ const router = express.Router();
 
 const {
   SignUp,
-  LogIn,
+  UserChk,
   ViewAll,
   ViewSelect,
   ViewUpdate,
@@ -134,11 +134,31 @@ router.get("/likes/:id", async (req, res) => {
 // 회원가입
 router.post("/signup", async (req, res) => {
   try {
-    const { user_id, user_pw } = req.body;
-    await SignUp(user_id, user_pw);
-    res.redirect("login");
+    const { user_id, user_pw, user_pw2_chk } = req.body;
+    if (!user_id) {
+      console.log("아이디를 입력해주세요");
+      return;
+    } else if (!user_pw || !user_pw2_chk) {
+      console.log("비밀번호를 입력해주세요.");
+      return;
+    } else if (user_pw != user_pw2_chk) {
+      console.log("비밀번호가 다릅니다.");
+      return;
+    }
+
+    const user_Chk = await UserChk(user_id);
+    // console.log(user_Chk[0] === undefined);
+    if (user_Chk[0] !== undefined) {
+      console.log("사용중인 아이디 입니다.");
+      return;
+    } else {
+      await SignUp(user_id, user_pw);
+      console.log("회원가입 완료");
+      res.redirect("login");
+    }
   } catch (error) {
     console.log("router post signup error");
+    console.error(error);
   }
 });
 
@@ -146,8 +166,22 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const { user_id, user_pw } = req.body;
-    const data = await LogIn(user_id, user_pw);
-    if (data[0].user_id == user_id && data[0].user_pw == user_pw) {
+    const data = await UserChk(user_id);
+    console.log(data);
+    if (!user_id) {
+      console.log("아이디를 입력해주세요.");
+      return;
+    } else if (!user_pw) {
+      console.log("비밀번호를 입력해주세요.");
+      return;
+    } else if (!data[0]) {
+      console.log("없는 사용자입니다.");
+      return;
+    } else if (data[0].user_pw != user_pw) {
+      console.log("비밀번호가 틀립니다.");
+      return;
+    } else if (data[0].user_id == user_id && data[0].user_pw == user_pw) {
+      console.log("로그인 성공");
       res.redirect("/ohstory");
     }
   } catch (error) {

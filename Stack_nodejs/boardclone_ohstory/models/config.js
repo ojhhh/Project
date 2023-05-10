@@ -5,6 +5,7 @@ const mysql = mysql2.createPool({
   password: "root",
   database: "ohstoryBoard",
   multipleStatements: true,
+  dateStrings: "date",
 });
 
 mysql.getConnection((err, res) => {

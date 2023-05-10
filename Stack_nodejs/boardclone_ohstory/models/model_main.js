@@ -10,7 +10,7 @@ const boardfunc = {
       console.log("models tableCheck error");
       console.error(error);
       await mysql.query(
-        "create table board (id INT AUTO_INCREMENT PRIMARY KEY,user_name VARCHAR(20),title VARCHAR(30),content VARCHAR(200),category VARCHAR(20),date VARCHAR(20) default '2023-05-10',likes INT default 0,comment VARCHAR(100),src VARCHAR(200)); insert into board (user_name, title, content, category, date, comment, src) values ('test', '[Nodejs] project','Nodejs toy project','Nodejs','2023-05-10', json_array('hello','world'), 'https://cdn.pixabay.com/photo/2015/04/23/17/41/node-js-736399_1280.png' );insert into board (user_name, title, content, category, date, comment, src) values ('jsuser', '[Javascript] project','Javascript toy project','Javascript','2023-05-10', json_array('Javascript'), 'https://www.vectorlogo.zone/logos/javascript/javascript-horizontal.svg' );insert into board (user_name, title, content, category, date, comment, src) values ('dba', '[Mysql] project','MySQL toy project','Mysql','2023-05-10', json_array('mysql'), 'https://www.mysql.com/common/logos/logo-mysql-170x115.png' );"
+        "create table board (id INT AUTO_INCREMENT PRIMARY KEY,user_name VARCHAR(20),title VARCHAR(30),content VARCHAR(200),category VARCHAR(20),date DATE DEFAULT(current_time),likes INT default 0,comment VARCHAR(100),src VARCHAR(200)); insert into board (user_name, title, content, category, comment, src) values ('test', '[Nodejs] project','Nodejs toy project','Nodejs', json_array('hello','world'), 'https://cdn.pixabay.com/photo/2015/04/23/17/41/node-js-736399_1280.png' ); insert into board (user_name, title, content, category, comment, src) values ('jsuser', '[Javascript] project','Javascript toy project','Javascript', json_array('Javascript'), 'https://www.vectorlogo.zone/logos/javascript/javascript-horizontal.svg' ); insert into board (user_name, title, content, category, comment, src) values ('dba', '[Mysql] project','MySQL toy project','Mysql', json_array('mysql'), 'https://www.mysql.com/common/logos/logo-mysql-170x115.png' );"
       );
     }
   },
@@ -40,14 +40,14 @@ const boardfunc = {
     }
   },
   // 로그인
-  Login: async function (user_id, user_pw) {
+  userChk: async function (user_id) {
     try {
       const data = await mysql.query("select * from users where user_id = ?", [
         user_id,
       ]);
       return data;
     } catch (error) {
-      console.log("model Login error");
+      console.log("model UserChk error");
       console.error(error);
     }
   },
