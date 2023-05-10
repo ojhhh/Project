@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>view page</title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <%- include('header.ejs') %>
+
+    <!-- container start -->
+    <div class="container">
+      <div class="container_title">
+        <div class="title_wrap">
+          <h2><%= data.title %></h2>
+          <h6><%= data.category %></h6>
+          <p>
+            <a href="/ohstory/update/<%= data.id %>">update</a
+            ><a href="/ohstory/delete/<%= data.id %>">delete</a>
+          </p>
+        </div>
+      </div>
+      <div class="container_wrap">
+        <div class="container_lt">
+          <!-- view start -->
+          <div class="view_container">
+            <div class="view_content">
+              <textarea name="content" id="" cols="30" rows="10" disabled>
+<%= data.content %></textarea
+              >
+              <div class="like_wrap">
+                <a href="/ohstory/likes/<%= data.id %>">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/138/138533.png?w=1380&t=st=1683714091~exp=1683714691~hmac=baae8c513b5c9bbaef3f068be9bdb933b849b170b109bd1469cbbcaf9f28d8d8"
+                    width="10px"
+                    height="10px"
+                    alt=""
+                  />
+                </a>
+                <span><%= data.likes %></span>
+              </div>
+              <div>
+                <h2>comment</h2>
+              </div>
+              <div class="comment_area">
+                <div class="comment_title">
+                  <% arr.forEach((el, index)=>{ %>
+                  <div class="com">
+                    <span><%= el %></span>
+                  </div>
+                  <% }); %>
+                </div>
+              </div>
+              <div class="comment_container">
+                <h2>comment write</h2>
+
+                <form action="/ohstory/comment/<%= data.id %>" method="post">
+                  <div class="comment_flex">
+                    <label for="">comment</label>
+                    <input
+                      type="text"
+                      name="comment"
+                      placeholder="댓글을 입력해주세요."
+                    />
+                  </div>
+                  <button>submit</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- view end -->
+        </div>
+        <div class="container_rt">
+          <!-- rt start -->
+          <%- include('./rt.ejs') %>
+          <!-- rt end -->
+        </div>
+      </div>
+    </div>
+    <!-- container end -->
+
+    <%- include('footer.ejs') %>
+  </body>
+</html>

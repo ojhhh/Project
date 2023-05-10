@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>update page</title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <%- include('header.ejs') %>
+
+    <!-- container start -->
+    <form action="/ohstory/update/<%= data.id %>" method="post">
+    <div class="container">
+      <div class="container_title">
+        <div class="title_wrap">
+          <input type="text" placeholder="<%= data.title %>" name="title"/>
+          <!-- <h2>[Nodejs] toy project</h2> -->
+          <!-- <p><a href="" onclick="location.href='#test'">update</a></p> -->
+          <select name="category" id="select_cate">
+            <option value="Nodejs">Nodejs</option>
+            <option value="Javascript">Javascript</option>
+            <option value="Mysql">MySQL</option>
+          </select>
+        </div>
+      </div>
+      <div class="container_wrap">
+        <div class="container_lt">
+          <!-- view start -->
+          <div class="view_container">
+            <div class="view_content">
+              <textarea
+                name="content"
+                id=""
+                cols="30"
+                rows="10"
+                placeholder="<%= data.content %>" name="content"
+              ></textarea>
+            </div>
+          </div>
+          <h3>writer</h3>
+          <input type="text" name="user_name" placeholder="<%= data.user_name %>" >
+          <!-- view end -->
+          <button>update</button>
+        </div>
+      </form>
+        <div class="container_rt">
+          <!-- rt start -->
+          <%- include('./rt.ejs') %>
+          <!-- rt end -->
+        </div>
+      </div>
+    </div>
+    <!-- container end -->
+
+    <%- include('footer.ejs') %>
+  </body>
+</html>

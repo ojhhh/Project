@@ -26,6 +26,10 @@ body {
 .container .title_wrap h2 {
   margin: 0;
 }
+.container .title_wrap h6 {
+  font-weight: 400;
+  margin: 0 0 0 10px;
+}
 .container .title_wrap span {
   margin: 0 0 0 5px;
   font-size: 16px;
@@ -35,14 +39,24 @@ body {
   margin-block-start: 0;
   margin-block-end: 0;
   position: absolute;
-  right: 10px;
-  bottom: 0;
-  font-size: 18px;
+  right: 0;
+  bottom: 4px;
+  font-size: 8px;
+  color: rgba(0, 0, 0, 0.6);
 }
+
 .container .title_wrap p a {
   text-decoration: none;
   color: rgba(0, 0, 0, 0.8);
+  margin-right: 4px;
 }
+
+#select_cate {
+  border: none;
+  margin: 0 0 2px 4px;
+  text-align: right;
+}
+
 .container_wrap {
   max-width: 700px;
   margin: 20px auto;
@@ -110,9 +124,11 @@ body {
   width: 200px;
   height: 70px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 }
 .boardlist .content_img img {
+  width: 100%;
+  aspect-ratio: 2 / 1;
 }
 /* container boardlist end */
 
@@ -127,7 +143,6 @@ body {
   box-sizing: border-box;
 }
 
-/* .container_wrap .container_rt .profile { */
 .profile {
   overflow: hidden;
   display: flex;
@@ -135,16 +150,13 @@ body {
   justify-content: flex-end;
 }
 
-/* .container_wrap .container_rt .profile .profile_img { */
 .profile .profile_img {
   width: 180px;
   height: 180px;
   background-image: url("https://cdn.pixabay.com/photo/2019/08/06/08/46/old-man-4387774_1280.png");
-  /* background-image: url("https://cdn.pixabay.com/photo/2021/02/06/09/03/man-5987447_1280.jpg"); */
   background-size: 150%;
   background-repeat: no-repeat;
   background-position: 35%, -50%;
-  /* background-position: 45%, -50%; */
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-bottom: 2px solid;
 }
@@ -174,3 +186,121 @@ body {
   color: rgba(0, 0, 0, 1);
 }
 /* container end */
+
+/* view start */
+.container_lt .view_container {
+  width: 100%;
+  margin-top: 20px;
+}
+.container_lt .view_container .view_content {
+}
+.container_lt .view_container .view_content textarea {
+  width: 100%;
+  height: 100px;
+  box-sizing: border-box;
+  border: none;
+  resize: none;
+  background-color: #fff;
+}
+.view_content .like_wrap {
+  width: 100%;
+  height: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.view_content .like_wrap img {
+  width: 10px;
+  height: 10px;
+}
+.view_content .like_wrap span {
+  margin: 0 4px;
+  font-size: 8px;
+}
+.view_content textarea:focus,
+.view_content input:focus {
+  outline: none;
+}
+.view_content .comment_area {
+  padding-left: 2px;
+  display: flex;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 4px 0;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.view_content .comment_title span {
+  margin-right: 5px;
+}
+.view_content .comment_title .com {
+  margin-bottom: 2px;
+}
+.view_content .comment_area .comment_func {
+  display: flex;
+}
+.view_content .comment_area .comment_func p {
+  margin: 0 20px 0 0;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 8px;
+}
+.view_content .comment_container {
+  margin-top: 20px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+.view_content .comment_container .comment_flex {
+  display: flex;
+  padding-right: 20px;
+}
+.view_content .comment_container .comment_flex label {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 60px;
+}
+.view_content .comment_container .comment_flex input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 30px;
+  border: none;
+  margin: 0px 20px;
+}
+
+.view_content .comment_container input:focus {
+}
+
+/* view end */
+
+/* ins start */
+.title_wrap input {
+  border: none;
+  font-size: 18px;
+}
+.container_lt input {
+  height: 20px;
+  border: none;
+}
+.container_lt input:focus {
+  outline: none;
+}
+.container_lt button {
+  font-size: 12px;
+  color: #fff;
+  width: 100%;
+  height: 35px;
+  background-color: rgba(0, 0, 0, 1);
+  border-radius: 10px;
+  border: none;
+  transition: all 0.25s;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.container_lt button:hover {
+  color: #000;
+  background-color: #fff;
+  border: 1px solid;
+}
+/* ins end */
