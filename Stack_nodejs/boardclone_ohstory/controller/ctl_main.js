@@ -107,12 +107,30 @@ exports.Likes = async function (id, lik) {
   }
 };
 
-exports.Verify = async function (req, res) {
+exports.AddToken = async function (user_id, token) {
   try {
-    const data = await boardfunc.verify(req, res);
-    return data;
+    await boardfunc.addtoken(user_id, token);
   } catch (error) {
     console.log("controller Verify error");
+    console.error(error);
+  }
+};
+
+exports.LoginInfo = async function () {
+  try {
+    const data = await boardfunc.logininfo();
+    return data[0];
+  } catch (error) {
+    console.log("controller LoginInfo error");
+    console.error(error);
+  }
+};
+
+exports.LogOut = async function (user_id) {
+  try {
+    await boardfunc.logout(user_id);
+  } catch (error) {
+    console.log("controller LogOut error");
     console.error(error);
   }
 };

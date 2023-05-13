@@ -23,7 +23,7 @@ const boardfunc = {
       // console.log(sql);
     } catch (error) {
       await mysql.query(
-        "create table users (id INT AUTO_INCREMENT PRIMARY KEY, user_id VARCHAR(20),user_pw VARCHAR(20))"
+        "create table users (id INT AUTO_INCREMENT PRIMARY KEY, user_id VARCHAR(20),user_pw VARCHAR(20),token VARCHAR(200))"
       );
       // console.log("models usersCheck error");
       // console.error(error);
@@ -162,23 +162,54 @@ const boardfunc = {
       console.error(error);
     }
   },
-  // 로그인 인증
-  verify: async function (req, res) {
+  // 로그인 인증 (토큰 저장)
+  addtoken: async function (user_id, token) {
     try {
-      // console.log("model verify req");
-      // console.log(req);
-      const token = req.session.token;
-      const key = process.env.tokenKEY;
-      const result = jwt.verify(token, key, (err, decoded) => {
+      const data = await mysql.query(
+        "update users set token = ? where user_id = ?; ",
+        [token, user_id]
+      );
+      return data;
+    } catch (error) {
+      console.log("model verify error");
+      console.error(error);
+    }
+  },
+  // 로그인 한 유저가 있는지 정보 가져오기
+  logininfo: async function () {
+    try {
+      const result = await mysql.query(
+        "select * from users where token IS NOT NULL"
+      );
+      const { user_id, token } = result[0][0];
+      const key = process.env.KEY2;
+
+      jwt.verify(token, key, async (err, decoded) => {
         if (err) {
-          console.log(err);
+          await mysql.query(
+            "update users set token = NULL where user_id = ? ",
+            [user_id]
+          );
+          console.error(err);
         } else {
           console.log(decoded);
         }
       });
-      return result;
+
+      return result[0];
     } catch (error) {
-      console.log("model verify error");
+      console.log("model logininfo error");
+      console.error(error);
+    }
+  },
+  // 로그아웃
+  logout: async function (user_id) {
+    try {
+      await mysql.query("update users set token = NULL where user_id = ?", [
+        user_id,
+      ]);
+    } catch (error) {
+      console.log("model logout error");
       console.error(error);
     }
   },

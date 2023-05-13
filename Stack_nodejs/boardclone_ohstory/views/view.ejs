@@ -17,8 +17,8 @@
           <h2><%= data.title %></h2>
           <h6><%= data.category %></h6>
           <p>
-            <a href="/ohstory/update/<%= data.id %>">update</a
-            ><a href="/ohstory/delete/<%= data.id %>">delete</a>
+            <a href="/update/<%= data.id %>">update</a
+            ><a href="/delete/<%= data.id %>">delete</a>
           </p>
         </div>
       </div>
@@ -31,15 +31,18 @@
 <%= data.content %></textarea
               >
               <div class="like_wrap">
-                <a href="/ohstory/likes/<%= data.id %>">
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/512/138/138533.png?w=1380&t=st=1683714091~exp=1683714691~hmac=baae8c513b5c9bbaef3f068be9bdb933b849b170b109bd1469cbbcaf9f28d8d8"
-                    width="10px"
-                    height="10px"
-                    alt=""
-                  />
-                </a>
-                <span><%= data.likes %></span>
+                <div class="username"><%= data.user_name %></div>
+                <div class="like_innder">
+                  <a href="/likes/<%= data.id %>">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/138/138533.png?w=1380&t=st=1683714091~exp=1683714691~hmac=baae8c513b5c9bbaef3f068be9bdb933b849b170b109bd1469cbbcaf9f28d8d8"
+                      width="10px"
+                      height="10px"
+                      alt=""
+                    />
+                  </a>
+                  <span><%= data.likes %></span>
+                </div>
               </div>
               <div>
                 <h2>comment</h2>
@@ -56,7 +59,7 @@
               <div class="comment_container">
                 <h2>comment write</h2>
 
-                <form action="/ohstory/comment/<%= data.id %>" method="post">
+                <form action="/comment/<%= data.id %>" method="post">
                   <div class="comment_flex">
                     <label for="">comment</label>
                     <input

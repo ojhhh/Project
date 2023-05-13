@@ -16,18 +16,27 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 app.use(express.urlencoded({ extended: false }));
-app.use("/ohstory", mainRouter);
-app.use(verifyRouter);
 app.use(express.static(path.join(__dirname, "public")));
 
-// cookies 생성
+// session 생성
 app.use(
   session({
-    secret: process.env.secretKEY,
+    secret: process.env.KEY,
     resave: false,
     saveUninitialized: true,
+    cookie: { secure: true },
   })
 );
+
+// router 위치는 session 아래 두기 안그러면 session 정보가 생성 후에 라우터로 전달되지 않음
+app.use(mainRouter);
+app.use(verifyRouter);
+
+// app.get("/", (req, res) => {
+//   console.log(req.session);
+// });
+
+console.log(app);
 
 app.listen(PORT, () => {
   console.log("Server On");

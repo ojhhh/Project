@@ -14,7 +14,9 @@ const {
   Delete,
   SubComment,
   Likes,
-  Verify,
+  AddToken,
+  LoginInfo,
+  LogOut,
 } = require("../controller/ctl_main");
 // const { viewSelect } = require("../models/model_main");
 // const { alertest } = require("../public/js/test");
@@ -24,11 +26,12 @@ const {
 // 메인 페이지
 router.get("/", async (req, res) => {
   try {
-    console.log(req);
+    let loginchk = await LoginInfo();
+    if (loginchk === undefined) {
+      loginchk = "undefined";
+    }
     const data = await ViewAll(req, res);
-    // console.log(data);
-    const vv = await Verify(req, res);
-    res.render("main", { data });
+    res.render("main", { data, loginchk });
   } catch (error) {
     console.log("route get / error");
     console.error(error);
@@ -38,9 +41,13 @@ router.get("/", async (req, res) => {
 // 우측 카테고리 버튼
 router.get("/category/:category", async (req, res) => {
   try {
+    let loginchk = await LoginInfo();
+    if (loginchk === undefined) {
+      loginchk = "undefined";
+    }
     const category = req.params.category;
     const data = await ViewCategory(category);
-    res.render("main", { data });
+    res.render("main", { data, loginchk });
   } catch (error) {
     console.log("route get ViewCategory error");
     console.error(error);
@@ -50,7 +57,11 @@ router.get("/category/:category", async (req, res) => {
 // 로그인 페이지
 router.get("/login", async (req, res) => {
   try {
-    res.render("login");
+    let loginchk = await LoginInfo();
+    if (loginchk === undefined) {
+      loginchk = "undefined";
+    }
+    res.render("login", { loginchk });
   } catch (error) {
     console.log("route get login error");
     console.error(error);
@@ -70,7 +81,11 @@ router.get("/signup", async (req, res) => {
 // 글 작성 페이지
 router.get("/ins", async (req, res) => {
   try {
-    res.render("ins");
+    let loginchk = await LoginInfo();
+    if (loginchk === undefined) {
+      loginchk = "undefined";
+    }
+    res.render("ins", { loginchk });
   } catch (error) {
     console.log("router get ins error");
     console.error(error);
@@ -80,6 +95,10 @@ router.get("/ins", async (req, res) => {
 // 상세 페이지
 router.get("/view/:id", async (req, res) => {
   try {
+    let loginchk = await LoginInfo();
+    if (loginchk === undefined) {
+      loginchk = "undefined";
+    }
     const { id } = req.params;
     const data = await ViewSelect(id);
 
@@ -87,7 +106,7 @@ router.get("/view/:id", async (req, res) => {
     if (arr == null) {
       arr = [];
     }
-    res.render("view", { data, arr });
+    res.render("view", { data, arr, loginchk });
   } catch (error) {
     console.log("router get /view:id error");
     console.error(error);
@@ -97,9 +116,13 @@ router.get("/view/:id", async (req, res) => {
 // 게시글 수정
 router.get("/update/:id", async (req, res) => {
   try {
+    let loginchk = await LoginInfo();
+    if (loginchk === undefined) {
+      loginchk = "undefined";
+    }
     const id = req.params.id;
     const data = await ViewUpdate(id);
-    res.render("update", { data });
+    res.render("update", { data, loginchk });
   } catch (error) {
     console.log("router get update error");
     console.error(error);
@@ -128,6 +151,18 @@ router.get("/likes/:id", async (req, res) => {
     res.redirect("/ohstory/view/" + id);
   } catch (error) {
     console.log("router post likes error");
+    console.error(error);
+  }
+});
+
+// 로그아웃
+router.get("/logout/:user_id", async (req, res) => {
+  try {
+    const userId = req.params.user_id;
+    await LogOut(userId);
+    res.redirect("/");
+  } catch (error) {
+    console.log("router get logout error");
     console.error(error);
   }
 });
@@ -171,21 +206,7 @@ router.post("/login", async (req, res) => {
   try {
     const { user_id, user_pw } = req.body;
     const data = await UserChk(user_id);
-    const key = process.env.tokenKEY;
-    const token = jwt.sign(
-      {
-        type: "JWT",
-        name: "tester",
-      },
-      key,
-      {
-        expiresIn: "5m",
-        issuer: "admin",
-      }
-    );
-    console.log(req);
-    console.log(token);
-
+    // console.log(req);
     if (!user_id) {
       console.log("아이디를 입력해주세요.");
       return;
@@ -200,20 +221,20 @@ router.post("/login", async (req, res) => {
       return;
     } else if (data[0].user_id == user_id && data[0].user_pw == user_pw) {
       console.log("로그인 성공");
-      // const token = jwt.sign(
-      //   {
-      //     type: "JWT",
-      //     name: "tester",
-      //   },
-      //   key,
-      //   {
-      //     expiresIn: "5m",
-      //     issuer: "admin",
-      //   }
-      // );
-      // console.log(req.session);
-      // console.log(token);
-      res.redirect("/ohstory");
+      const key = process.env.KEY2;
+      const token = jwt.sign(
+        {
+          type: "JWT",
+          name: "tester",
+        },
+        key,
+        {
+          expiresIn: "10s",
+          issuer: "admin",
+        }
+      );
+      await AddToken(user_id, token);
+      res.redirect("/");
     }
   } catch (error) {
     console.log("router login error");

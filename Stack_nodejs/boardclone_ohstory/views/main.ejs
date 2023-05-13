@@ -10,7 +10,7 @@
   <body>
     <!-- header start -->
 
-    <%- include('header.ejs') %>
+    <%- include('header') %>
 
     <!-- header end -->
 
@@ -20,14 +20,14 @@
         <div class="title_wrap">
           <h2>전체 글</h2>
           <span><%= data.length %></span>
-          <p><a href="/ohstory/ins">insert</a></p>
+          <p><a href="/ins">insert</a></p>
         </div>
       </div>
       <div class="container_wrap">
         <div class="container_lt">
           <!-- boardlist start -->
           <% data.forEach((el, index) => { %>
-          <a href="/ohstory/view/<%= el.id %>">
+          <a href="/view/<%= el.id %>">
             <div class="boardlist">
               <div class="content">
                 <div class="title">
@@ -51,37 +51,13 @@
         </div>
         <!-- rt start -->
         <%- include('./rt.ejs') %>
-        <!-- <div class="container_rt">
-          <div class="profile">
-            <div class="profile_img"></div>
-          </div>
-          <div class="category">
-            <div class="category_wrap">
-              <ul>
-                <li><a href="/ohstory">viewAll</a></li>
-                <li><a href="/ohstory">Javascript</a></li>
-                <li><a href="/ohstory">GIT</a></li>
-                <li><a href="/ohstory">CSS</a></li>
-                <li><a href="/ohstory">HTML</a></li>
-                <li><a href="/ohstory">Nodejs</a></li>
-                <li><a href="/ohstory">MySQL</a></li>
-              </ul>
-            </div>
-          </div>
-        </div> -->
         <!-- rt end -->
       </div>
     </div>
     <!-- container end -->
 
-    <%- include('footer.ejs') %>
     <!-- footer start -->
-    <!-- <div class="footer">
-      <div class="footer_wrap">
-        <span>Copyright © Kakao Corp. All rights reserved.</span>
-      </div>
-    </div> -->
+    <%- include('footer.ejs') %>
     <!-- footer end -->
   </body>
-  <!-- <script src="/js/test.js"></script> -->
 </html>
