@@ -106,3 +106,13 @@ exports.Likes = async function (id, lik) {
     console.error(error);
   }
 };
+
+exports.Verify = async function (req, res) {
+  try {
+    const data = await boardfunc.verify(req, res);
+    return data;
+  } catch (error) {
+    console.log("controller Verify error");
+    console.error(error);
+  }
+};

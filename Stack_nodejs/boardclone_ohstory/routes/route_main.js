@@ -1,5 +1,6 @@
-const express = require("express");
-const router = express.Router();
+const router = require("express").Router();
+const jwt = require("jsonwebtoken");
+const dot = require("dotenv").config();
 
 const {
   SignUp,
@@ -13,17 +14,20 @@ const {
   Delete,
   SubComment,
   Likes,
+  Verify,
 } = require("../controller/ctl_main");
-const { viewSelect } = require("../models/model_main");
-
+// const { viewSelect } = require("../models/model_main");
+// const { alertest } = require("../public/js/test");
 /////////////////////////////////////////////////////
 // get
 
 // 메인 페이지
 router.get("/", async (req, res) => {
   try {
+    console.log(req);
     const data = await ViewAll(req, res);
     // console.log(data);
+    const vv = await Verify(req, res);
     res.render("main", { data });
   } catch (error) {
     console.log("route get / error");
@@ -167,7 +171,21 @@ router.post("/login", async (req, res) => {
   try {
     const { user_id, user_pw } = req.body;
     const data = await UserChk(user_id);
-    console.log(data);
+    const key = process.env.tokenKEY;
+    const token = jwt.sign(
+      {
+        type: "JWT",
+        name: "tester",
+      },
+      key,
+      {
+        expiresIn: "5m",
+        issuer: "admin",
+      }
+    );
+    console.log(req);
+    console.log(token);
+
     if (!user_id) {
       console.log("아이디를 입력해주세요.");
       return;
@@ -182,6 +200,19 @@ router.post("/login", async (req, res) => {
       return;
     } else if (data[0].user_id == user_id && data[0].user_pw == user_pw) {
       console.log("로그인 성공");
+      // const token = jwt.sign(
+      //   {
+      //     type: "JWT",
+      //     name: "tester",
+      //   },
+      //   key,
+      //   {
+      //     expiresIn: "5m",
+      //     issuer: "admin",
+      //   }
+      // );
+      // console.log(req.session);
+      // console.log(token);
       res.redirect("/ohstory");
     }
   } catch (error) {

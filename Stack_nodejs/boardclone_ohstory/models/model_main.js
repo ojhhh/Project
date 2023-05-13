@@ -1,4 +1,6 @@
 const mysql = require("./config");
+const jwt = require("jsonwebtoken");
+const dot = require("dotenv").config();
 
 const boardfunc = {
   // board table이 없으면 테이블 생성
@@ -157,6 +159,26 @@ const boardfunc = {
       await mysql.query("update board set likes = ? where id = ?", [lik, id]);
     } catch (error) {
       console.log("model likes error");
+      console.error(error);
+    }
+  },
+  // 로그인 인증
+  verify: async function (req, res) {
+    try {
+      // console.log("model verify req");
+      // console.log(req);
+      const token = req.session.token;
+      const key = process.env.tokenKEY;
+      const result = jwt.verify(token, key, (err, decoded) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(decoded);
+        }
+      });
+      return result;
+    } catch (error) {
+      console.log("model verify error");
       console.error(error);
     }
   },
