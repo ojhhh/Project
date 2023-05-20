@@ -14,19 +14,18 @@ const {
   Delete,
   SubComment,
   Likes,
-  AddToken,
+  Login,
   LoginInfo,
   LogOut,
 } = require("../controller/ctl_main");
-// const { viewSelect } = require("../models/model_main");
-// const { alertest } = require("../public/js/test");
 /////////////////////////////////////////////////////
 // get
 
 // 메인 페이지
 router.get("/", async (req, res) => {
+  console.log(req.session);
   try {
-    let loginchk = await LoginInfo();
+    let loginchk = await LoginInfo(req);
     if (loginchk === undefined) {
       loginchk = "undefined";
     }
@@ -57,7 +56,7 @@ router.get("/category/:category", async (req, res) => {
 // 로그인 페이지
 router.get("/login", async (req, res) => {
   try {
-    let loginchk = await LoginInfo();
+    let loginchk = await LoginInfo(req);
     if (loginchk === undefined) {
       loginchk = "undefined";
     }
@@ -71,7 +70,11 @@ router.get("/login", async (req, res) => {
 // 회원가입 페이지
 router.get("/signup", async (req, res) => {
   try {
-    res.render("signup");
+    let loginchk = await LoginInfo();
+    if (loginchk === undefined) {
+      loginchk = "undefined";
+    }
+    res.render("signup", { loginchk });
   } catch (error) {
     console.log("route get signup error");
     console.error(error);
@@ -191,6 +194,7 @@ router.post("/signup", async (req, res) => {
       console.log("사용중인 아이디 입니다.");
       return;
     } else {
+      // bcrypt를 활용한 password 암호화
       await SignUp(user_id, user_pw);
       console.log("회원가입 완료");
       res.redirect("login");
@@ -202,45 +206,46 @@ router.post("/signup", async (req, res) => {
 });
 
 // 로그인
-router.post("/login", async (req, res) => {
-  try {
-    const { user_id, user_pw } = req.body;
-    const data = await UserChk(user_id);
-    // console.log(req);
-    if (!user_id) {
-      console.log("아이디를 입력해주세요.");
-      return;
-    } else if (!user_pw) {
-      console.log("비밀번호를 입력해주세요.");
-      return;
-    } else if (!data[0]) {
-      console.log("없는 사용자입니다.");
-      return;
-    } else if (data[0].user_pw != user_pw) {
-      console.log("비밀번호가 틀립니다.");
-      return;
-    } else if (data[0].user_id == user_id && data[0].user_pw == user_pw) {
-      console.log("로그인 성공");
-      const key = process.env.KEY2;
-      const token = jwt.sign(
-        {
-          type: "JWT",
-          name: "tester",
-        },
-        key,
-        {
-          expiresIn: "10s",
-          issuer: "admin",
-        }
-      );
-      await AddToken(user_id, token);
-      res.redirect("/");
-    }
-  } catch (error) {
-    console.log("router login error");
-    console.error(error);
-  }
-});
+router.post("/login", Login);
+// router.post("/login", async (req, res) => {
+//   try {
+//     const { user_id, user_pw } = req.body;
+//     const data = await UserChk(user_id);
+
+//     if (!user_id) {
+//       console.log("아이디를 입력해주세요.");
+//       return;
+//     } else if (!user_pw) {
+//       console.log("비밀번호를 입력해주세요.");
+//       return;
+//     } else if (!data[0]) {
+//       console.log("없는 사용자입니다.");
+//       return;
+//     } else if (data[0].user_pw != user_pw) {
+//       console.log("비밀번호가 틀립니다.");
+//       return;
+//     } else if (data[0].user_id == user_id && data[0].user_pw == user_pw) {
+//       console.log("로그인 성공");
+//       const key = process.env.KEY2;
+//       const token = jwt.sign(
+//         {
+//           type: "JWT",
+//           name: "tester",
+//         },
+//         key,
+//         {
+//           expiresIn: "10s",
+//           issuer: "admin",
+//         }
+//       );
+//       await AddToken(user_id, token);
+//       res.redirect("/");
+//     }
+//   } catch (error) {
+//     console.log("router login error");
+//     console.error(error);
+//   }
+// });
 
 // 글 업로드
 router.post("/upload", async (req, res) => {
@@ -262,7 +267,7 @@ router.post("/upload", async (req, res) => {
       });
     }
     await Upload(data);
-    res.redirect("/ohstory");
+    res.redirect("/");
   } catch (error) {
     console.log("router post upload error");
     console.error(error);

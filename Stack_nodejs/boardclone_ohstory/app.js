@@ -36,8 +36,6 @@ app.use(verifyRouter);
 //   console.log(req.session);
 // });
 
-console.log(app);
-
 app.listen(PORT, () => {
   console.log("Server On");
 });

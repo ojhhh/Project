@@ -1,6 +1,28 @@
 const mysql = require("./config");
 const jwt = require("jsonwebtoken");
 const dot = require("dotenv").config();
+const bcrypt = require("bcrypt");
+
+// bcrypt를 활용한 password 암호화
+const createHash = (user_pw) => {
+  return new Promise((resolve, reject) => {
+    bcrypt.hash(user_pw, 10, (err, data) => {
+      if (err) reject(err);
+
+      resolve(data);
+    });
+  });
+};
+
+// bcrypt로 저장된 password의 값을 가져와 비교
+const compare = (user_pw, hash) => {
+  return new Promise((resolve, reject) => {
+    bcrypt.compare(user_pw, hash, (err, same) => {
+      if (err) reject(err);
+      resolve(same);
+    });
+  });
+};
 
 const boardfunc = {
   // board table이 없으면 테이블 생성
@@ -12,7 +34,7 @@ const boardfunc = {
       console.log("models tableCheck error");
       console.error(error);
       await mysql.query(
-        "create table board (id INT AUTO_INCREMENT PRIMARY KEY,user_name VARCHAR(20),title VARCHAR(30),content VARCHAR(200),category VARCHAR(20),date DATE DEFAULT(current_time),likes INT default 0,comment VARCHAR(100),src VARCHAR(200)); insert into board (user_name, title, content, category, comment, src) values ('test', '[Nodejs] project','Nodejs toy project','Nodejs', json_array('hello','world'), 'https://cdn.pixabay.com/photo/2015/04/23/17/41/node-js-736399_1280.png' ); insert into board (user_name, title, content, category, comment, src) values ('jsuser', '[Javascript] project','Javascript toy project','Javascript', json_array('Javascript'), 'https://www.vectorlogo.zone/logos/javascript/javascript-horizontal.svg' ); insert into board (user_name, title, content, category, comment, src) values ('dba', '[Mysql] project','MySQL toy project','Mysql', json_array('mysql'), 'https://www.mysql.com/common/logos/logo-mysql-170x115.png' );"
+        "create table board (id INT AUTO_INCREMENT PRIMARY KEY,user_id VARCHAR(20),title VARCHAR(30),content VARCHAR(200),category VARCHAR(20),date DATE DEFAULT(current_time),likes INT default 0, comment VARCHAR(100), src VARCHAR(200)); insert into board (user_id, title, content, category, comment, src) values ('test', '[Nodejs] project','Nodejs toy project','Nodejs', json_array('hello','world'), 'https://cdn.pixabay.com/photo/2015/04/23/17/41/node-js-736399_1280.png'); insert into board (user_id, title, content, category, comment, src) values ('jsuser', '[Javascript] project','Javascript toy project','Javascript', json_array('Javascript'), 'https://www.vectorlogo.zone/logos/javascript/javascript-horizontal.svg'); insert into board (user_id, title, content, category, comment, src) values ('dba', '[Mysql] project','MySQL toy project','Mysql', json_array('mysql'), 'https://www.mysql.com/common/logos/logo-mysql-170x115.png');"
       );
     }
   },
@@ -23,18 +45,18 @@ const boardfunc = {
       // console.log(sql);
     } catch (error) {
       await mysql.query(
-        "create table users (id INT AUTO_INCREMENT PRIMARY KEY, user_id VARCHAR(20),user_pw VARCHAR(20),token VARCHAR(200))"
+        "create table users (id INT AUTO_INCREMENT PRIMARY KEY, user_id VARCHAR(20),user_pw VARCHAR(128),token VARCHAR(200) FOREIGN KEY (user_id) REFERENCES board(user_id))"
       );
-      // console.log("models usersCheck error");
-      // console.error(error);
     }
   },
   // 회원가입
   signUp: async function (user_id, user_pw) {
     try {
+      // bcrypt를 활용한 패스워드 암호화
+      const hash = await createHash(user_pw);
       await mysql.query("insert into users (user_id, user_pw) values (?, ?)", [
         user_id,
-        user_pw,
+        hash,
       ]);
     } catch (error) {
       console.log("models signUp error");
@@ -106,10 +128,10 @@ const boardfunc = {
   // 게시글 입로드
   upload: async function (data) {
     try {
-      const { user_name, title, category, content, src } = data;
+      const { user_id, title, category, content, src } = data;
       await mysql.query(
-        "insert into board(user_name, title, category, content, src, comment) values (?, ?, ?, ?, ?, json_array())",
-        [user_name, title, category, content, src]
+        "insert into board(user_id, title, category, content, src, comment) values (?, ?, ?, ?, ?, json_array())",
+        [user_id, title, category, content, src]
       );
     } catch (error) {
       console.log("models upload error");
@@ -119,10 +141,10 @@ const boardfunc = {
   // 게시글 수정
   update: async function (data, id) {
     try {
-      const { user_name, title, category, content, src } = data;
+      const { user_id, title, category, content, src } = data;
       await mysql.query(
-        "update board set user_name = ?, title = ?, category = ?, content = ?, src = ? where id = ?",
-        [user_name, title, category, content, src, id]
+        "update board set user_id = ?, title = ?, category = ?, content = ?, src = ? where id = ?",
+        [user_id, title, category, content, src, id]
       );
     } catch (error) {
       console.log("model update error");
@@ -154,49 +176,107 @@ const boardfunc = {
     }
   },
   // 좋아요
-  likes: async function (id, lik) {
+  likes: async function (id, like) {
     try {
-      await mysql.query("update board set likes = ? where id = ?", [lik, id]);
+      await mysql.query("update board set likes = ? where id = ?", [like, id]);
     } catch (error) {
       console.log("model likes error");
       console.error(error);
     }
   },
   // 로그인 인증 (토큰 저장)
-  addtoken: async function (user_id, token) {
+  login: async function (req, res) {
+    const { user_id, user_pw } = req.body;
     try {
-      const data = await mysql.query(
-        "update users set token = ? where user_id = ?; ",
-        [token, user_id]
+      const [data] = await mysql.query(
+        "SELECT * FROM users WHERE user_id = ?",
+        [user_id]
       );
-      return data;
+      if (!user_id) {
+        console.log("아이디를 입력해주세요.");
+        return;
+      } else if (!user_pw) {
+        console.log("비밀번호를 입력해주세요.");
+        return;
+      }
+      if (!data[0]?.user_id) {
+        console.log("없는 아이디 입니다.");
+        return;
+      } else {
+        const user_password = await compare(user_pw, data[0].user_pw);
+
+        if (!data[0]?.user_id) {
+          console.log("없는 사용자입니다.");
+          return;
+        } else if (!user_password) {
+          console.log("비밀번호가 틀립니다.");
+          return;
+        } else if (data[0]?.user_id == user_id && user_password) {
+          console.log("로그인 성공");
+          const accessKey = process.env.ACCESS_TOKEN_KEY;
+          const refreshKey = process.env.REFRESH_TOKEN_KEY;
+          const accessToken = jwt.sign(
+            {
+              type: "JWT",
+              name: data[0].user_id,
+            },
+            accessKey,
+            {
+              expiresIn: "10s",
+              issuer: "admin",
+            }
+          );
+          const refreshToken = jwt.sign(
+            {
+              type: "JWT",
+              name: data[0].user_id,
+            },
+            refreshKey,
+            {
+              expiresIn: "1h",
+            }
+          );
+          await mysql.query("update users SET refresh = ? where user_id = ?;", [
+            refreshToken,
+            user_id,
+          ]);
+          req.session.accessToken = accessToken;
+          req.session.refreshToken = refreshToken;
+        }
+
+        res.redirect("/");
+      }
     } catch (error) {
       console.log("model verify error");
       console.error(error);
     }
   },
   // 로그인 한 유저가 있는지 정보 가져오기
-  logininfo: async function () {
+  logininfo: async function (req) {
     try {
-      const result = await mysql.query(
-        "select * from users where token IS NOT NULL"
+      const [result] = await mysql.query(
+        "select * from users where refresh IS NOT NULL"
       );
-      const { user_id, token } = result[0][0];
-      const key = process.env.KEY2;
+      const accessKey = req.session.accessToken;
+      if (result[0]?.user_id) {
+        jwt.verify(
+          accessKey,
+          process.env.ACCESS_TOKEN_KEY,
+          async (err, decoded) => {
+            if (err) {
+              await mysql.query(
+                "update users set refresh = NULL where user_id = ? ",
+                [result[0].user_id]
+              );
+              // console.error(err);
+            } else {
+              console.log(decoded);
+            }
+          }
+        );
 
-      jwt.verify(token, key, async (err, decoded) => {
-        if (err) {
-          await mysql.query(
-            "update users set token = NULL where user_id = ? ",
-            [user_id]
-          );
-          console.error(err);
-        } else {
-          console.log(decoded);
-        }
-      });
-
-      return result[0];
+        return result[0];
+      }
     } catch (error) {
       console.log("model logininfo error");
       console.error(error);
@@ -205,7 +285,7 @@ const boardfunc = {
   // 로그아웃
   logout: async function (user_id) {
     try {
-      await mysql.query("update users set token = NULL where user_id = ?", [
+      await mysql.query("update users set refresh = NULL where user_id = ?", [
         user_id,
       ]);
     } catch (error) {
