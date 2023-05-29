@@ -3,7 +3,7 @@
 // npm init -y -> package.json 기본값 생성
 // sudo npm install express express-session mysql2 ejs jsonwebtoken sequelize bcrypt
 
-require("dotenv").config();
+const dot = require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
 const sequelize = require("./config");

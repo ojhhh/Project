@@ -1,3 +1,3 @@
 const User = require("./users");
 
-// User.init();
+module.exports = { User };
