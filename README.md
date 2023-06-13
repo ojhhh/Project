@@ -85,3 +85,15 @@
 - 나작작 프로젝트 상세페이지 작업
 - 댓글 및 대댓글 기능 별점 통계 기능 구현완료
 - 다른 페이지와 merge 작업 중 전체 목록에서 해당 게시물로 넘어갈때 게시물의 id값을 넘겨주는 작업 필요
+- -> id를 넘길때 a 태그 뒷부분에 id값을 입력해서 넘김
+- 예를들어 http://127.0.0.1:5500/view.html?id=1 이렇게 작성하면
+- const getUrl = new URL(window.location.href);
+- const getParams = new URLSearchParams(getUrl.search);
+- const getId = getParams.get("id");
+- 이런식으로 현재 url에 입력되어있는 id의 값을 가져올 수 있음
+  > axios get과 post
+- 단순 get은 검색만 할때 post는 수정만 할때라고 생각해서 사용했는데 너무 포괄적으로 이해한거 같음
+- insert하기 위해 post를 사용했는데 데이터가 넘어가지 않고 get으로 했을때 넘어가길래 뭔가 싶어 찾아보니 get 요청 할때 데이터를 params에 담아 보냈을땐 잘되고 post는 안되는 차이가 있어 찾아 보니 post는 본문에 데이터를 담기 때문에 바로 보내닌까 됬음
+- 그렇게 해서 get에선 req.query로 post에선 req.body로 데이터를 받음
+- 그리고 post에서는 첫 번째 매개변수가 요청URL 두번째 매개변수가 요청 본문, 세번째 매개변수는 요청에 대한 설정을 정의 하는 곳이기 때문에 'withCredentials: true'은 3번째 매개변수에 위치 시켜야 한다
+- 이렇게 하지않으면 rawHeader에 쿠키값이 넘어가지않음
