@@ -15,7 +15,6 @@ const path = require("path");
 
 const app = express();
 
-// 왜 안올라가
 // const reqmysql2 = require("mysql2");
 
 // const mysql2 = reqmysql2.createConnection({
