@@ -17,6 +17,9 @@ exports.LogIn = async (req, res) => {
           { expiresIn: "20m" }
         );
         req.session.accessToken = token;
+        console.log("loginController req.session");
+        console.log(req.sessionID);
+        console.log(req.session);
         res.send(true);
       } else {
         console.log("wrong password");

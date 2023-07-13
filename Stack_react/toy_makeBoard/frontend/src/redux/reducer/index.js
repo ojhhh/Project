@@ -1,4 +1,7 @@
 import { combineReducers } from "redux";
-import reducer from "./login";
+import logins from "./login";
+import posts from "./posts";
 
-export { reducer };
+const rootReducer = combineReducers({ logins, posts });
+
+export default rootReducer;

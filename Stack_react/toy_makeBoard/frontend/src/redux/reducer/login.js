@@ -1,4 +1,5 @@
 let init = {
+  id: "",
   isLogin: false,
 };
 
@@ -6,10 +7,10 @@ function reducer(state = init, action) {
   const { type, payload } = action;
   switch (type) {
     case "LOGIN":
-      return { ...state, isLogin: true };
+      return { ...state, id: payload, isLogin: true };
 
     case "LOGOUT":
-      return { ...state, isLogin: false };
+      return { ...state, id: "", isLogin: false };
 
     default:
       return state;

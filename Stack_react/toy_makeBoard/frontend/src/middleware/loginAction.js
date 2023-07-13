@@ -5,8 +5,9 @@ function login(user_id, user_pw) {
     const { data } = await axios.get("http://127.0.0.1:8080/users/login", {
       params: { user_id, user_pw },
     });
+    // console.log(data);
     if (data) {
-      dispatch({ type: "LOGIN" });
+      dispatch({ type: "LOGIN", payload: user_id });
     }
   };
 }
@@ -17,4 +18,4 @@ function logout() {
   };
 }
 
-export const logins = { login, logout };
+export const loginAction = { login, logout };

@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { SignWrap } from "./Sign.styled";
 import { Header } from "../../layout";
-import { signups } from "../../../middleware";
-import axios from "axios";
+import { signAction } from "../../../middleware";
 
 const Sign = () => {
   const dispatch = useDispatch();
@@ -22,7 +21,7 @@ const Sign = () => {
   }, [userName]);
 
   function getSignup() {
-    dispatch(signups(userId, userPw, userName));
+    dispatch(signAction(userId, userPw, userName));
   }
 
   return (

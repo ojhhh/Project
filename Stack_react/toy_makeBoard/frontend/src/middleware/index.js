@@ -1,4 +1,5 @@
-import { logins } from "./loginAction";
-import signups from "./signAction";
+import { loginAction } from "./loginAction";
+import { postAction } from "./postAction";
+import signAction from "./signAction";
 
-export { logins, signups };
+export { loginAction, signAction, postAction };
