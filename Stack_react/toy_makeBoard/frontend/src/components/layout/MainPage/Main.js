@@ -54,7 +54,11 @@ const Main = () => {
             ) : (
               <button onClick={getUserInfo}>login</button>
             )}
-            {!loginChk && <Link to="/sign">signup</Link>}
+            {!loginChk && (
+              <Link to="/sign" className="sign">
+                signup
+              </Link>
+            )}
           </div>
           {/*  */}
         </div>

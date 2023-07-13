@@ -5,7 +5,6 @@ export const PostWrap = styled.div`
   height: 100vh;
   & .container {
     margin: 0 auto;
-    border: 1px solid;
     width: 600px;
     height: 800px;
   }
@@ -14,7 +13,6 @@ export const PostWrap = styled.div`
 export const PostsMainWrap = styled.div`
   width: 100%;
   height: 720px;
-  border: 1px solid;
   & .titleBox {
     display: flex;
     width: 600px;
@@ -32,7 +30,7 @@ export const PostsMainWrap = styled.div`
   .writer,
   .btnBox {
     height: 50px;
-    border: 1px solid;
+    border-bottom: 1px solid;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -59,5 +57,22 @@ export const PostsMainWrap = styled.div`
     width: 100%;
     height: 50%;
     padding: 0;
+  }
+  & button {
+    width: 100%;
+    height: 40px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: 500;
+    transition: 0.5s;
+    border: none;
+  }
+  & button:hover {
+    background-color: black;
+    color: white;
+    transition: 0.5s;
+    border: 1px solid rgba(0, 0, 0, 0.3);
   }
 `;
