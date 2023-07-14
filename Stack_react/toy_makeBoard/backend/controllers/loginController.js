@@ -4,8 +4,10 @@ const { users } = require("../models");
 
 exports.LogIn = async (req, res) => {
   try {
-    const { user_id, user_pw } = req.query;
+    // console.log(req);
+    const { user_id, user_pw } = req.body;
     const user = await users.findOne({ where: { user_id }, raw: true });
+
     if (user?.user_id == user_id) {
       const same = bcrypt.compareSync(user_pw, user.user_pw);
       if (same) {
@@ -17,17 +19,14 @@ exports.LogIn = async (req, res) => {
           { expiresIn: "20m" }
         );
         req.session.accessToken = token;
-        console.log("loginController req.session");
-        console.log(req.sessionID);
-        console.log(req.session);
-        res.send(true);
+        res.cookie("token", token, { httpOnly: true });
+        // console.log("loginController");
+        res.send(token);
       } else {
-        console.log("wrong password");
-        res.send(false);
+        res.send("wrong password");
       }
     } else {
-      console.log("wrong id");
-      res.send(false);
+      res.send("wrong id");
     }
   } catch (error) {
     console.error(error);

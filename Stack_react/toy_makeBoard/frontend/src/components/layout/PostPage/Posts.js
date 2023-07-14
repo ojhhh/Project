@@ -11,16 +11,19 @@ const Posts = () => {
   const allPost = useSelector((state) => state.posts.allPost);
   const userChk = useSelector((state) => state.logins.id);
   const postChk = useSelector((state) => state.posts.cnt);
+  // const accessToken = useSelector((state) => state.logins.token);
+  // console.log(useSelector((state) => state));
+
   useEffect(() => {}, []);
+  useEffect(() => {
+    dispatch(postAction.postSelect());
+  }, [postChk]);
   useEffect(() => {
     // console.log(allPost);
   }, [allPost]);
   useEffect(() => {
     // console.log(userChk);
   }, [userChk]);
-  useEffect(() => {
-    dispatch(postAction.postSelect());
-  }, [postChk]);
 
   function postInsert() {
     nav("/insert");

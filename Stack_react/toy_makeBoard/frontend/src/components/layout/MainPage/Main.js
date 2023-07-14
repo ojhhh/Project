@@ -21,13 +21,16 @@ const Main = () => {
   }, [userPw]);
   useEffect(() => {
     // console.log(loginChk);
-    if (loginChk) {
-      nav("/posts");
-    }
+    // if (loginChk) {
+    //   nav("/posts");
+    // }
   }, [loginChk]);
 
-  function getUserInfo() {
-    dispatch(loginAction.login(userId, userPw));
+  async function getUserInfo() {
+    const login = await dispatch(loginAction.login(userId, userPw));
+    if (login) {
+      nav("/posts");
+    }
   }
   function logOut() {
     dispatch({ type: "LOGOUT" });

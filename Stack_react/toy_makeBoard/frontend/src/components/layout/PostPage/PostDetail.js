@@ -13,8 +13,8 @@ const PostDetail = () => {
     state.posts.allPost.find((e) => e.id == getPostId.id)
   );
 
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [title, setTitle] = useState(getPost.title);
+  const [content, setContent] = useState(getPost.content);
 
   function postUpdate() {
     const data = { id: getPostId.id, title, content };

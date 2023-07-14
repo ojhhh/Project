@@ -7,7 +7,12 @@ function reducer(state = init, action) {
   const { type, payload } = action;
   switch (type) {
     case "LOGIN":
-      return { ...state, id: payload, isLogin: true };
+      // console.log(payload);
+      return {
+        ...state,
+        id: payload,
+        isLogin: true,
+      };
 
     case "LOGOUT":
       return { ...state, id: "", isLogin: false };

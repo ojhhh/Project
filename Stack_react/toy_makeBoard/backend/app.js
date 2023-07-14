@@ -5,25 +5,28 @@ const { sequelize } = require("./models");
 const { userRouter, postRouter } = require("./routers");
 const path = require("path");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: ["http://127.0.0.1:3000", "http://localhost:3000"],
     credentials: true,
   })
 );
 
-app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(
   session({
-    secret: process.env.SESSION_KEY,
+    secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: false,
   })
 );
+
+app.use(express.json());
 
 sequelize
   .sync({ force: false })

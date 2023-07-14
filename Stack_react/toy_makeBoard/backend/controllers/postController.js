@@ -1,10 +1,13 @@
-const sequelize = require("sequelize");
 const { posts } = require("../models");
 
 exports.AllPosts = async (req, res) => {
   try {
     const data = await posts.findAll({ raw: true });
-    res.send(data);
+    const response = {
+      data,
+      user_id: req.decoded.id,
+    };
+    res.send(response);
   } catch (error) {
     console.error(error);
   }

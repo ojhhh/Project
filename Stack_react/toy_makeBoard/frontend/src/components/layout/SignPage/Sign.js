@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SignWrap } from "./Sign.styled";
 import { Header } from "../../layout";
 import { signAction } from "../../../middleware";
+import { useNavigate } from "react-router-dom";
 
 const Sign = () => {
   const dispatch = useDispatch();
+  const nav = useNavigate();
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
   const [userName, setUserName] = useState("");
-
   useEffect(() => {
     // console.log(userId);
   }, [userId]);
@@ -20,8 +21,14 @@ const Sign = () => {
     // console.log(userName);
   }, [userName]);
 
-  function getSignup() {
-    dispatch(signAction(userId, userPw, userName));
+  async function getSignup() {
+    const accept = await dispatch(signAction(userId, userPw, userName));
+    if (!accept) {
+      alert("이미 사용중인 아이디 입니다.");
+    } else {
+      alert("가입 완료");
+      nav("/");
+    }
   }
 
   return (

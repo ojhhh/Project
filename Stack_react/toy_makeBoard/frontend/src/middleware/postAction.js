@@ -2,10 +2,12 @@ import axios from "axios";
 
 const postSelect = () => {
   return async (dispatch) => {
-    const data = await axios.get("http://127.0.0.1:8080/posts/allposts", {
+    const { data } = await axios.get("http://127.0.0.1:8080/posts/allposts", {
       withCredentials: true,
     });
-    dispatch({ type: "SELECT", payload: data });
+
+    dispatch({ type: "SELECT", payload: data.data });
+    dispatch({ type: "LOGIN", payload: data.user_id });
   };
 };
 
