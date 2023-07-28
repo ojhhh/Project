@@ -40,7 +40,7 @@ let consumer;
 const createWorker = async () => {
   worker = await mediasoup.createWorker({
     rtcMinPort: 2000,
-    rtcMaxPort: 2050,
+    rtcMaxPort: 2100,
   });
   console.log(`worker pid ${worker.pid}`);
 
@@ -72,19 +72,34 @@ peers.on("connection", async (socket) => {
   // console.log(socket.id);
   socket.emit("connection-success", {
     socketId: socket.id,
+    existsProducer: producer ? true : false,
   });
 
   socket.on("disconnect", () => {
     console.log("peer disconnected");
   });
 
-  router = await worker.createRouter({ mediaCodecs });
-
-  socket.on("getRtpCapabilities", (callback) => {
-    const rtpCapabilities = router.rtpCapabilities;
-    console.log("rtp Capabilities", rtpCapabilities);
-    callback({ rtpCapabilities });
+  socket.on("createRoom", async (callback) => {
+    if (router === undefined) {
+      router = await worker.createRouter({ mediaCodecs });
+      console.log(`Router ID : ${router.id}`);
+    }
+    getRtpCapabilities(callback);
   });
+
+  const getRtpCapabilities = (callback) => {
+    const rtpCapabilities = router.rtpCapabilities;
+
+    callback({ rtpCapabilities });
+  };
+
+  // router = await worker.createRouter({ mediaCodecs });
+
+  // socket.on("getRtpCapabilities", (callback) => {
+  //   const rtpCapabilities = router.rtpCapabilities;
+  //   console.log("rtp Capabilities", rtpCapabilities);
+  //   callback({ rtpCapabilities });
+  // });
 
   socket.on("createWebRtcTransport", async ({ sender }, callback) => {
     console.log(`is this a sender require ${sender}`);
