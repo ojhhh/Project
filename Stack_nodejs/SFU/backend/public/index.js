@@ -1,17 +1,21 @@
 const io = require("socket.io-client");
 const mediasoupClient = require("mediasoup-client");
 
+// 방 이름 설정
+const roomName = window.location.pathname.split("/")[2];
+
 // 서버 측과 동일한 네임스페이스 사용
 const socket = io("/mediasoup");
 
 socket.on("connection-success", ({ socketId, existsProducer }) => {
-  // console.log(socketId);
+  console.log(socketId, existsProducer);
+  getLocalStream();
 });
 
 let device;
 let rtpCapabilities;
 let producerTransport;
-let consumerTransport;
+let consumerTransport = [];
 let producer;
 let consumer;
 let isProducer = false;
@@ -49,7 +53,17 @@ const streamSuccess = (stream) => {
     ...params,
   };
 
-  goConnect(true);
+  joinRoom();
+};
+
+const joinRoom = () => {
+  socket.emit("joinRoom", { roomName }, (data) => {
+    console.log(`Router RTP Capavilities.. ${data.rtpCapabilities}`);
+
+    rtpCapabilities = data.rtpCapabilities;
+
+    createDevice();
+  });
 };
 
 const getLocalStream = () => {
@@ -98,7 +112,7 @@ const createDevice = async () => {
     console.log("Device RTP Capabilities", device.rtpCapabilities);
 
     // 장치가 로드되면 전송 생성
-    goCreateTransport();
+    createSendTransport();
   } catch (error) {
     console.error(error);
     if (error.name === "UnsupportedError") {
@@ -120,8 +134,18 @@ const getRtpCapabilities = () => {
   });
 };
 
+socket.on("new-producer", ({ producerId }) =>
+  signalNewConsumerTransport(remoteProducerId)
+);
+
+const getProducers = () => {
+  socket.emit("getProducers", (producerIds) => {
+    producerIds.forEach(signalNewConsumerTransport);
+  });
+};
+
 const createSendTransport = () => {
-  socket.emit("createWebRtcTransport", { sender: true }, ({ params }) => {
+  socket.emit("createWebRtcTransport", { consumer: false }, ({ params }) => {
     if (params.error) {
       console.error(params.error);
       return;
@@ -152,8 +176,12 @@ const createSendTransport = () => {
             rtpParameters: parameters.rtpParameters,
             appData: parameters.appData,
           },
-          ({ id }) => {
+          ({ id, producersExist }) => {
             callback({ id });
+
+            if (producersExist) {
+              getProducers();
+            }
           }
         );
       } catch (error) {
@@ -179,7 +207,7 @@ const connectSendTransport = async () => {
   });
 };
 
-const createRecvTransport = async () => {
+const signalNewConsumerTransport = async (remoteProducerId) => {
   // 동일한 사람이 보내면 false
   await socket.emit(
     "createWebRtcTransport",
@@ -205,16 +233,22 @@ const createRecvTransport = async () => {
           console.error(error);
         }
       });
-      connectRecvTransport();
+      connectRecvTransport(consumerTransport, remoteProducerId, params.id);
     }
   );
 };
 
-const connectRecvTransport = async () => {
+const connectRecvTransport = async (
+  consumerTransport,
+  remoteProducerId,
+  serverConsumerTransportId
+) => {
   await socket.emit(
     "consume",
     {
       rtpCapabilities: device.rtpCapabilities,
+      remoteProducerId,
+      serverConsumerTransportId,
     },
     async ({ params }) => {
       if (params.error) {
@@ -223,26 +257,65 @@ const connectRecvTransport = async () => {
       }
 
       console.log(params);
-      consumer = await consumerTransport.consume({
+      const consumer = await consumerTransport.consume({
         id: params.id,
         producerId: params.producerId,
         kind: params.kind,
         rtpParameters: params.rtpParameters,
       });
 
+      consumerTransports = [
+        ...consumerTransports,
+        {
+          consumerTransport,
+          serverConsumerTransportId: params.id,
+          producerId: remoteProducerId,
+          consumer,
+        },
+      ];
+
+      // consumer가 입장하면 새로운 캠화면 생성
+      const newElem = document.createElement("div");
+      newElem.setAttribute("id", `td=${remoteProducerId}`);
+      newElem.setAttribute("class", "remoteVideo");
+      newElem.innerHTML =
+        '<video id="' + remoteProducerId + '" autoplay class="video"></video>';
+      videoContainer.appendChile(newElem);
+
       const { track } = consumer;
 
-      remoteVideo.srcObject = new MediaStream([track]);
+      // remoteVideo.srcObject = new MediaStream([track]);
+      document.getElementById(remoteProducerId).srcObject = new MediaStream([
+        track,
+      ]);
 
-      socket.emit("consumer-resume");
+      // socket.emit("consumer-resume");
+      socket.emit("consumer-resume", {
+        serverConsumerId: params.serverConsumerId,
+      });
     }
   );
 };
 
-btnLocalVideo.addEventListener("click", getLocalStream);
+// 소켓 연결이 끊어지면 제거
+socket.on("producer-closed", ({ remoteProducerId }) => {
+  const producerToClose = consumerTransports.find(
+    (transportData) => transportData.producerId === remoteProducerId
+  );
+  producerToClose.consumerTransport.close();
+  producerToClose.consumer.close();
+
+  consumerTransports = consumerTransports.filter(
+    (transportData) => transportData.producerId !== remoteProducerId
+  );
+
+  videoContainer.removeChile(document.getElementById(`td-${remoteProducerId}`));
+});
+
+// btnLocalVideo.addEventListener("click", getLocalStream);
 // btnRtpCapabilities.addEventListener("click", getRtpCapabilities);
 // btnDevice.addEventListener("click", createDevice);
 // btnCreateSendTransport.addEventListener("click", createSendTransport);
 // btnConnectSendTransport.addEventListener("click", connectSendTransport);
-btnRecvSendTransport.addEventListener("click", goConsume);
+// btnRecvSendTransport.addEventListener("click", goConsume);
 // btnConnectRecvTransport.addEventListener("click", connectRecvTransport);
