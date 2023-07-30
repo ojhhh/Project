@@ -1,7 +1,7 @@
 import express from "express";
 import https from "httpolyglot";
 import fs from "fs";
-import path, { resolve } from "path";
+import path from "path";
 import { Server } from "socket.io";
 import mediasoup from "mediasoup";
 
@@ -38,8 +38,8 @@ let worker;
 let rooms = {}; // router를 사용하여 방을 만듬
 let peers = {};
 let transports = [];
-let producer = [];
-let consumer = [];
+let producers = [];
+let consumers = [];
 
 const createWorker = async () => {
   worker = await mediasoup.createWorker({
@@ -222,7 +222,7 @@ connections.on("connection", async (socket) => {
     const { roomName } = peers[socket.id];
 
     let producerList = [];
-    producer.forEach((producerData) => {
+    producers.forEach((producerData) => {
       if (
         producerData.socketId !== socket.id &&
         producerData.roomName === roomName
@@ -291,10 +291,11 @@ connections.on("connection", async (socket) => {
     "transport-recv-connect",
     async ({ dtlsParameters, serverConsumerTransportId }) => {
       console.log(`DTLS PARAMS: ${dtlsParameters}`);
-      const consumerTransport = transports.find((transportData) => {
-        transportData.consumer &&
-          transportData.transport.id == serverConsumerTransportId;
-      }).transport;
+      const consumerTransport = transports.find(
+        (transportData) =>
+          transportData.consumer &&
+          transportData.transport.id == serverConsumerTransportId
+      ).transport;
       await consumerTransport.connect({ dtlsParameters });
     }
   );

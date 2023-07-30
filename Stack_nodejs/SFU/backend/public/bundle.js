@@ -21868,9 +21868,9 @@ socket.on("connection-success", ({ socketId, existsProducer }) => {
 let device;
 let rtpCapabilities;
 let producerTransport;
-let consumerTransport = [];
-let producer;
-let consumer;
+let consumerTransports = [];
+let audioProducer;
+let videoProducer;
 let isProducer = false;
 
 let params = {
@@ -21897,14 +21897,16 @@ let params = {
   },
 };
 
+let audioParams;
+let videoParams = { params };
+let consumingTransports = [];
+
 const streamSuccess = (stream) => {
   localVideo.srcObject = stream;
   // 사용자 video stream 가져오기
-  const track = stream.getVideoTracks()[0];
-  params = {
-    track,
-    ...params,
-  };
+
+  audioParams = { track: stream.getAudioTracks()[0], ...audioParams };
+  videoParams = { track: stream.getVideoTracks()[0], ...videoParams };
 
   joinRoom();
 };
@@ -21941,18 +21943,18 @@ const getLocalStream = () => {
     });
 };
 
-const goConsume = () => {
-  goConnect(false);
-};
+// const goConsume = () => {
+//   goConnect(false);
+// };
 
-const goConnect = (producerOrConsumer) => {
-  isProducer = producerOrConsumer;
-  device === undefined ? getRtpCapabilities() : goCreateTransport();
-};
+// const goConnect = (producerOrConsumer) => {
+//   isProducer = producerOrConsumer;
+//   device === undefined ? getRtpCapabilities() : goCreateTransport();
+// };
 
-const goCreateTransport = () => {
-  isProducer ? createSendTransport() : createRecvTransport();
-};
+// const goCreateTransport = () => {
+//   isProducer ? createSendTransport() : createRecvTransport();
+// };
 
 const createDevice = async () => {
   try {
@@ -21974,28 +21976,18 @@ const createDevice = async () => {
   }
 };
 
-const getRtpCapabilities = () => {
-  // 서버에 라우터 rtp 기능 요청
-  // 서버의 소켓을 확인하고 서버가 rtp 기능을 포함하는 데이터 개체를 다시 보냄
-  socket.emit("createRoom", (data) => {
-    console.log(`Router RTP Capabilities ${data.rtpCapabilities}`);
+// const getRtpCapabilities = () => {
+//   // 서버에 라우터 rtp 기능 요청
+//   // 서버의 소켓을 확인하고 서버가 rtp 기능을 포함하는 데이터 개체를 다시 보냄
+//   socket.emit("createRoom", (data) => {
+//     console.log(`Router RTP Capabilities ${data.rtpCapabilities}`);
 
-    rtpCapabilities = data.rtpCapabilities;
+//     rtpCapabilities = data.rtpCapabilities;
 
-    // 라우터에서 rtpCapability가 확보되면 디바이스 생성
-    createDevice();
-  });
-};
-
-socket.on("new-producer", ({ producerId }) =>
-  signalNewConsumerTransport(remoteProducerId)
-);
-
-const getProducers = () => {
-  socket.emit("getProducers", (producerIds) => {
-    producerIds.forEach(signalNewConsumerTransport);
-  });
-};
+//     // 라우터에서 rtpCapability가 확보되면 디바이스 생성
+//     createDevice();
+//   });
+// };
 
 const createSendTransport = () => {
   socket.emit("createWebRtcTransport", { consumer: false }, ({ params }) => {
@@ -22047,39 +22039,57 @@ const createSendTransport = () => {
 };
 
 const connectSendTransport = async () => {
-  console.log("connectSendTransport");
-  console.log(producerTransport);
-  producer = await producerTransport.produce(params);
+  audioProducer = await producerTransport.produce(audioParams);
+  videoProducer = await producerTransport.produce(videoParams);
 
-  producer.on("trackended", () => {
-    console.log("track ended");
+  audioProducer.on("trackended", () => {
+    console.log("audio track ended");
   });
 
-  producer.on("transportclose", () => {
-    console.log("transport ended");
+  audioProducer.on("transportclose", () => {
+    console.log("audio transport ended");
+  });
+
+  videoProducer.on("trackended", () => {
+    console.log("video track ended");
+  });
+
+  videoProducer.on("transportclose", () => {
+    console.log("video transport ended");
   });
 };
 
 const signalNewConsumerTransport = async (remoteProducerId) => {
   // 동일한 사람이 보내면 false
+  if (consumingTransports.includes(remoteProducerId)) {
+    return;
+  }
+  consumingTransports.push(remoteProducerId);
+
   await socket.emit(
     "createWebRtcTransport",
-    { sender: false },
+    { consumer: true },
     ({ params }) => {
       if (params.error) {
         console.error(params.error);
         return;
       }
 
-      console.log(params);
+      let consumerTransport;
 
-      consumerTransport = device.createRecvTransport(params);
+      try {
+        consumerTransport = device.createRecvTransport(params);
+      } catch (error) {
+        console.error(error);
+        return;
+      }
 
       consumerTransport.on("connect", async ({ dtlsParameters }, callback) => {
         try {
           await socket.emit("transport-recv-connect", {
             // transportId: consumerTransport.id,
             dtlsParameters,
+            serverConsumerTransportId: params.id,
           });
           callback();
         } catch (error) {
@@ -22089,6 +22099,16 @@ const signalNewConsumerTransport = async (remoteProducerId) => {
       connectRecvTransport(consumerTransport, remoteProducerId, params.id);
     }
   );
+};
+
+socket.on("new-producer", ({ producerId }) =>
+  signalNewConsumerTransport(producerId)
+);
+
+const getProducers = () => {
+  socket.emit("getProducers", (producerIds) => {
+    producerIds.forEach(signalNewConsumerTransport);
+  });
 };
 
 const connectRecvTransport = async (
@@ -22130,9 +22150,18 @@ const connectRecvTransport = async (
       // consumer가 입장하면 새로운 캠화면 생성
       const newElem = document.createElement("div");
       newElem.setAttribute("id", `td=${remoteProducerId}`);
-      newElem.setAttribute("class", "remoteVideo");
-      newElem.innerHTML =
-        '<video id="' + remoteProducerId + '" autoplay class="video"></video>';
+
+      if (params.kind == "audio") {
+        newElem.innerHTML =
+          '<audio id="' + remoteProducerId + '" audioplay></audio>';
+      } else {
+        newElem.setAttribute("class", "remoteVideo");
+        newElem.innerHTML =
+          '<video id="' +
+          remoteProducerId +
+          '" autoplay class="video"></video>';
+      }
+
       videoContainer.appendChile(newElem);
 
       const { track } = consumer;
@@ -22162,7 +22191,7 @@ socket.on("producer-closed", ({ remoteProducerId }) => {
     (transportData) => transportData.producerId !== remoteProducerId
   );
 
-  videoContainer.removeChile(document.getElementById(`td-${remoteProducerId}`));
+  videoContainer.removeChild(document.getElementById(`td-${remoteProducerId}`));
 });
 
 // btnLocalVideo.addEventListener("click", getLocalStream);
