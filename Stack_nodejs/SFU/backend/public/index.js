@@ -49,10 +49,11 @@ let videoParams = { params };
 let consumingTransports = [];
 
 const streamSuccess = (stream) => {
+  console.log("streamSuccess");
   localVideo.srcObject = stream;
   // 사용자 video stream 가져오기
 
-  audioParams = { track: stream.getAudioTracks()[0], ...audioParams };
+  // audioParams = { track: stream.getAudioTracks()[0], ...audioParams };
   videoParams = { track: stream.getVideoTracks()[0], ...videoParams };
 
   joinRoom();
@@ -186,16 +187,17 @@ const createSendTransport = () => {
 };
 
 const connectSendTransport = async () => {
-  audioProducer = await producerTransport.produce(audioParams);
+  // console.log(audioParams);
+  // audioProducer = await producerTransport.produce(audioParams);
   videoProducer = await producerTransport.produce(videoParams);
 
-  audioProducer.on("trackended", () => {
-    console.log("audio track ended");
-  });
+  // audioProducer.on("trackended", () => {
+  //   console.log("audio track ended");
+  // });
 
-  audioProducer.on("transportclose", () => {
-    console.log("audio transport ended");
-  });
+  // audioProducer.on("transportclose", () => {
+  //   console.log("audio transport ended");
+  // });
 
   videoProducer.on("trackended", () => {
     console.log("video track ended");
@@ -296,7 +298,7 @@ const connectRecvTransport = async (
 
       // consumer가 입장하면 새로운 캠화면 생성
       const newElem = document.createElement("div");
-      newElem.setAttribute("id", `td=${remoteProducerId}`);
+      newElem.setAttribute("id", `td-${remoteProducerId}`);
 
       if (params.kind == "audio") {
         newElem.innerHTML =
@@ -309,7 +311,7 @@ const connectRecvTransport = async (
           '" autoplay class="video"></video>';
       }
 
-      videoContainer.appendChile(newElem);
+      videoContainer.appendChild(newElem);
 
       const { track } = consumer;
 

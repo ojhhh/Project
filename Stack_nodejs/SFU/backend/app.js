@@ -34,12 +34,54 @@ const io = new Server(httpsServer);
 
 const connections = io.of("/mediasoup");
 
+let rooms = [];
+let roomIndex = 1;
 let worker;
-let rooms = {}; // router를 사용하여 방을 만듬
 let peers = {};
 let transports = [];
 let producers = [];
 let consumers = [];
+
+app.get("/sfu", (req, res) => {
+  console.log(req);
+  let roomToJoin;
+  let foundRoom = false;
+
+  // rooms를 순회하면서 빈 자리가 있는 방을 찾습니다.
+  for (let room of rooms) {
+    if (room.peers.length < 4) {
+      roomToJoin = room;
+      foundRoom = true;
+      break;
+    }
+  }
+
+  // 만약 모든 방이 차 있으면 새로운 방을 만듭니다.
+  if (!foundRoom) {
+    roomToJoin = {
+      name: `room${rooms.length + 1}`,
+      peers: [],
+    };
+    rooms.push(roomToJoin);
+  }
+  console.log("rooms");
+  console.log(rooms);
+
+  // 유저를 방에 추가합니다.
+  roomToJoin.peers.push({ req });
+
+  // 유저를 방에 리디렉션시킵니다.
+  res.redirect(`/sfu/${roomToJoin.name}`);
+});
+
+io.on("connection", (socket) => {
+  socket.on("disconnect", () => {
+    let roomOfUser = rooms.find((room) => room.peers.includes(socket));
+    if (roomOfUser) {
+      roomOfUser.peers = roomOfUser.peers.filter((peer) => peer !== socket);
+    }
+  });
+});
 
 const createWorker = async () => {
   worker = await mediasoup.createWorker({
@@ -95,16 +137,23 @@ connections.on("connection", async (socket) => {
     producers = removeItems(producers, socket.id, "producer");
     transports = removeItems(transports, socket.id, "transport");
 
-    const { roomName } = peers[socket.id];
-    delete peers[socket.id];
+    if (peers[socket.id]) {
+      const { roomName } = peers[socket.id];
+      delete peers[socket.id];
 
-    rooms[roomName] = {
-      router: rooms[roomName].router,
-      peers: rooms[roomName].peers.filter((socketId) => socketId !== socket.id),
-    };
+      rooms[roomName] = {
+        router: rooms[roomName].router,
+        peers: rooms[roomName].peers.filter(
+          (socketId) => socketId !== socket.id
+        ),
+      };
+    }
   });
 
   socket.on("joinRoom", async ({ roomName }, callback) => {
+    if (rooms[roomName] && rooms[roomName].peers.length >= 4) {
+      return callback({ error: "Room is full" });
+    }
     const router1 = await createRoom(roomName, socket.id);
 
     peers[socket.id] = {
@@ -142,28 +191,6 @@ connections.on("connection", async (socket) => {
 
     return router1;
   };
-
-  // socket.on("createRoom", async (callback) => {
-  //   if (router === undefined) {
-  //     router = await worker.createRouter({ mediaCodecs });
-  //     console.log(`Router ID : ${router.id}`);
-  //   }
-  //   getRtpCapabilities(callback);
-  // });
-
-  // const getRtpCapabilities = (callback) => {
-  //   const rtpCapabilities = router.rtpCapabilities;
-
-  //   callback({ rtpCapabilities });
-  // };
-
-  // router = await worker.createRouter({ mediaCodecs });
-
-  // socket.on("getRtpCapabilities", (callback) => {
-  //   const rtpCapabilities = router.rtpCapabilities;
-  //   console.log("rtp Capabilities", rtpCapabilities);
-  //   callback({ rtpCapabilities });
-  // });
 
   socket.on("createWebRtcTransport", async ({ consumer }, callback) => {
     const roomName = peers[socket.id].roomName;
@@ -405,13 +432,6 @@ const createWebRtcTransport = async (router) => {
         console.log("transport closed");
       });
 
-      // callback({
-      //   params: {
-      //     id: transport.id,
-      //     iceParameters: transport.iceParameters,
-      //     iceCandidates: transport.iceCandidates,
-      //     dtlsParameters: transport.dtlsParameters,
-      //   },
       // });
 
       resolve(transport);
