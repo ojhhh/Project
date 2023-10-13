@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.0",
+    "ganache-cli": "^6.12.2",
+    "styled-components": "^6.0.9",
+    "truffle": "^5.11.5"
+  },
+  "name": "toy_productshop",
+  "version": "1.0.0",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "mocha": "^10.1.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
