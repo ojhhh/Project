@@ -15,7 +15,18 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      version: "0.8.20",
+      version: "0.8.19",
     },
   },
+
+  // db: {
+  //   enabled: false,
+  //   host: "127.0.0.1",
+  //   adapter: {
+  //     name: "indexeddb",
+  //     settings: {
+  //       directory: ".db"
+  //     }
+  //   }
+  // }
 };
