@@ -1,24 +1,15 @@
 {
-  "dependencies": {
-    "@openzeppelin/contracts": "^5.0.0",
-    "ganache-cli": "^6.12.2",
-    "styled-components": "^6.0.9",
-    "truffle": "^5.11.5"
-  },
-  "name": "toy_productshop",
+  "name": "toy_myproduct",
   "version": "1.0.0",
-  "main": "truffle-config.js",
-  "directories": {
-    "test": "test"
-  },
-  "devDependencies": {
-    "mocha": "^10.1.0"
-  },
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.0"
+  }
 }
