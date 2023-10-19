@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import useWeb3 from "../../hooks/web3.hook";
+import abi from "../../abi/nft.json";
 import {
   HeaderWrap,
   HeaderLeftWrap,
@@ -6,15 +8,39 @@ import {
   ExchangeWalletWrap,
   Group,
 } from "./Header.styled";
+import { Link } from "react-router-dom";
 
 const Header = () => {
+  const { user, web3 } = useWeb3();
+  const [contract, setContract] = useState(null);
+
+  useEffect(() => {
+    if (web3) {
+      if (contract) return;
+
+      const nftMarket = new web3.eth.Contract(
+        abi,
+        "0x1c4F3caF901c1AA1d225Fb9F436d1B93A3346b7F",
+        { data: "" }
+      );
+      setContract(nftMarket);
+    }
+  }, [web3]);
+
+  const handleConnectwallet = () => {};
+
   return (
     <HeaderWrap>
       <HeaderLeftWrap>
         <Group>
-          <div className="logo">
-            <img src={`${process.env.PUBLIC_URL}/images/okx_logo.png`} alt="" />
-          </div>
+          <Link to="/">
+            <div className="logo">
+              <img
+                src={`${process.env.PUBLIC_URL}/images/okx_logo.png`}
+                alt=""
+              />
+            </div>
+          </Link>
           <ExchangeWalletWrap>
             <div className="exchangeWallet">
               <div className="exchangeWalletBorder">
@@ -49,7 +75,7 @@ const Header = () => {
       <HeaderRightWrap>
         <Group>
           {/* 메타마스크 연결되있으면 계정이 보이고 연결안되있으면 버튼으로 보임 */}
-          <div className="connectWallet">
+          <div className="connectWallet" onClick={handleConnectwallet}>
             <span>Connect Wallet</span>
           </div>
           <div className="downloadapp">

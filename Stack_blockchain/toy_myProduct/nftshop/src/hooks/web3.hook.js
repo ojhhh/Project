@@ -13,7 +13,6 @@ const useWeb3 = () => {
         })
         .then(async ([data]) => {
           const web3Provider = new Web3(window.ethereum);
-          setWeb3(web3Provider);
           setUser({
             account: data,
             balance: web3Provider.utils.toWei(
@@ -21,6 +20,7 @@ const useWeb3 = () => {
               "ether"
             ),
           });
+          setWeb3(web3Provider);
         });
     } else {
       alert("install metamask");

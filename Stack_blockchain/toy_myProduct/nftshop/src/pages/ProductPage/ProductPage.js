@@ -14,6 +14,7 @@ import {
   ToggleBtnImage,
   Group,
 } from "./ProductPage.styled";
+import { Link } from "react-router-dom";
 
 import Card from "../../components/card/Card";
 
@@ -60,10 +61,12 @@ const ProductPage = () => {
                 />
               </div>
               <div className="profileBtn">
-                <img
-                  src={`${process.env.PUBLIC_URL}/images/user-regular.svg`}
-                  alt=""
-                />
+                <Link to="/mypage">
+                  <img
+                    src={`${process.env.PUBLIC_URL}/images/user-regular.svg`}
+                    alt=""
+                  />
+                </Link>
               </div>
             </ProductTopMenuWrap>
           </div>
