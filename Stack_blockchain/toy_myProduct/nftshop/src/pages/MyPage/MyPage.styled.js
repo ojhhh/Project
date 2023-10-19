@@ -1,4 +1,10 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const pulseAnimation = keyframes`
+  0% { font-size: 1.1em; }
+  50% { font-size: 1.3em; }
+  100% { font-size: 1.1em; }
+  `;
 
 export const Group = styled.div`
   display: flex;
@@ -16,7 +22,7 @@ export const MyPageProfile = styled.div`
   background-size: cover;
   & .profileWrap {
     width: 1440px;
-    height: 300px;
+    height: 280px;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -83,7 +89,7 @@ export const MyPageProfile = styled.div`
 
 export const Taplayer = styled.div`
   width: 100%;
-  height: 80px;
+  height: 60px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
@@ -142,5 +148,133 @@ export const Taplayer = styled.div`
 
 export const MyPageBody = styled.div`
   width: 100%;
-  border: 1px solid;
+`;
+
+export const BodyTabs = styled.div`
+  width: 1440px;
+  height: 60px;
+  margin: 0 auto;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  & .callectedTab,
+  .activityTab,
+  .nftordersTab {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+  }
+  & .callectedTab {
+    border-bottom: 2px solid;
+  }
+  & .callectedTab span,
+  .activityTab span,
+  .nftordersTab span {
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  & .activityTab span,
+  .nftordersTab span {
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+  & .activityTab span:hover,
+  .nftordersTab span:hover {
+    color: rgba(0, 0, 0, 1);
+  }
+
+  & .saleBtn {
+    width: 120px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.1);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    animation: ${pulseAnimation} 2s infinite;
+  }
+  & .saleBtn:hover {
+    border: 1px solid;
+    box-sizing: border-box;
+  }
+  & .saleBtn span {
+    font-weight: 600;
+  }
+`;
+
+export const BodyFilter = styled.div`
+  width: 1440px;
+  height: 60px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  & .filterBtn {
+    height: 35px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+  }
+  & .filterBtn img {
+    width: 15px;
+    height: 15px;
+    margin: 0 10px;
+  }
+  & .filterBtn span {
+    font-size: 14px;
+    margin-right: 10px;
+  }
+  & .filterInput {
+    width: 300px;
+    height: 35px;
+    margin-right: 20px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+  }
+  & .filterInput img {
+    width: 15px;
+    height: 15px;
+    margin: 0 10px;
+  }
+  & .filterInput input {
+    outline: none;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  & .sortTab {
+    width: 150px;
+    height: 35px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  & .sortTab:hover {
+    border: 1px solid;
+  }
+  & .sortTab span {
+    margin-right: 10px;
+  }
+  & .sortTab img {
+    width: 10px;
+    height: 10px;
+  }
+`;
+
+export const MyPageCard = styled.div`
+  width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
 `;
