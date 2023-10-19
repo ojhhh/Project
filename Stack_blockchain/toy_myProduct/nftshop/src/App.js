@@ -5,8 +5,8 @@ import ProductPage from "./pages/ProductPage/ProductPage";
 function App() {
   return (
     <>
-      {/* <MyPage /> */}
-      <ProductPage />
+      <MyPage />
+      {/* <ProductPage /> */}
     </>
   );
 }

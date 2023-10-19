@@ -48,6 +48,7 @@ const Header = () => {
 
       <HeaderRightWrap>
         <Group>
+          {/* 메타마스크 연결되있으면 계정이 보이고 연결안되있으면 버튼으로 보임 */}
           <div className="connectWallet">
             <span>Connect Wallet</span>
           </div>

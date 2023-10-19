@@ -10,11 +10,12 @@ import {
   ProductPageMainWrap,
   ProductPageMainBtns,
   ProductPageMain,
-  ProductCard,
   UnderArrowImage,
   ToggleBtnImage,
   Group,
 } from "./ProductPage.styled";
+
+import Card from "../../components/card/Card";
 
 const ProductPage = () => {
   return (
@@ -144,34 +145,8 @@ const ProductPage = () => {
               </Group>
             </ProductPageMainBtns>
             <ProductPageMain>
-              <ProductCard>
-                <div className="cardImg">
-                  <img
-                    src={`${process.env.PUBLIC_URL}/images/test.png`}
-                    alt=""
-                  />
-                </div>
-                <div className="cardText">
-                  <div className="nftTitle">
-                    <span>#1</span>
-                  </div>
-                  <div className="nftOwner">
-                    <span>account</span>
-                  </div>
-                  <div className="nftPrice">
-                    <Group>
-                      <span>Price</span>
-                    </Group>
-                    <Group>
-                      <img
-                        src={`${process.env.PUBLIC_URL}/images/ether_price.png`}
-                        alt=""
-                      />
-                      <span>0.001</span>
-                    </Group>
-                  </div>
-                </div>
-              </ProductCard>
+              {/* CardComponent start */}
+              <Card />
             </ProductPageMain>
           </ProductPageMainWrap>
         </ProductPageBodyWrap>
