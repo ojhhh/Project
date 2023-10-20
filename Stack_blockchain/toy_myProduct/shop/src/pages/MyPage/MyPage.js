@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   MyPageWrap,
   MyPageProfile,
@@ -10,20 +10,42 @@ import {
   Group,
 } from "./MyPage.styled";
 import Header from "../Header/Header";
-import MyCard from "../../components/card/MyCard";
-import SalePopup from "../../components/popup/SalePopup";
+import BuyCard from "../../components/card/BuyCard";
+import SalePopup from "../popup/SalePopup";
+import Global from "../../Global";
 
 const MyPage = () => {
   // 메타마스크 정보 가져오기
+  const { user, web3, contract, balance, sessionUser } = useContext(Global);
   const [salePop, setSalePop] = useState(false);
+  const [tabs, setTabs] = useState("Callected");
 
   const salePopHandler = () => {
     setSalePop(!salePop);
   };
 
   useEffect(() => {
-    // console.log(salePop);
-  }, [salePop]);
+    if (contract) {
+      (async () => {
+        const balanceOf = await contract.methods
+          .balanceOf(user.account)
+          .call({ from: user.account });
+
+        console.log("balanceOf : ", parseInt(balanceOf));
+      })();
+    }
+  }, [contract]);
+
+  useEffect(() => {}, [salePop]);
+
+  const handleAccoutCopy = () => {
+    navigator.clipboard.writeText(user.account);
+  };
+
+  const handleSelectTab = (e) => {
+    const tab = e.target.innerHTML;
+    setTabs(tab);
+  };
 
   return (
     <>
@@ -40,11 +62,11 @@ const MyPage = () => {
               </div>
               <div>
                 <div className="userAccount">
-                  <span>0xFDJFOI...DSF2</span>
-                  <div className="copyBtn"></div>
+                  <span>{sessionUser}</span>
+                  <div className="copyBtn" onClick={handleAccoutCopy}></div>
                 </div>
                 <div className="userBalance">
-                  <span>$0.00</span>
+                  <span>{balance.slice(0, 6)} ETH</span>
                 </div>
               </div>
             </div>
@@ -79,10 +101,13 @@ const MyPage = () => {
           </div>
         </Taplayer>
         <MyPageBody>
-          <BodyTabs>
+          <BodyTabs tabs={tabs}>
             <Group>
               <div className="callectedTab">
-                <span>Callected</span>
+                <span onClick={handleSelectTab}>Callected</span>
+              </div>
+              <div className="MyNftTab">
+                <span onClick={handleSelectTab}>MyNFTs</span>
               </div>
               <div className="activityTab">
                 <span>Activity</span>
@@ -128,7 +153,8 @@ const MyPage = () => {
           </BodyFilter>
 
           <MyPageCard>
-            <MyCard />
+            {tabs == "Callected" ? <BuyCard /> : null}
+            {/* <MyCard /> */}
           </MyPageCard>
         </MyPageBody>
       </MyPageWrap>

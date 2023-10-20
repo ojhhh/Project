@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import useWeb3 from "../../hooks/web3.hook";
-import abi from "../../abi/nft.json";
+import React, { useState, useEffect, useContext } from "react";
 import {
   HeaderWrap,
   HeaderLeftWrap,
@@ -9,25 +7,22 @@ import {
   Group,
 } from "./Header.styled";
 import { Link } from "react-router-dom";
+import Global from "../../Global";
 
 const Header = () => {
-  const { user, web3 } = useWeb3();
-  const [contract, setContract] = useState(null);
+  const { user, web3, sessionUser, setSessionUser, contract, setContract } =
+    useContext(Global);
 
   useEffect(() => {
-    if (web3) {
-      if (contract) return;
-
-      const nftMarket = new web3.eth.Contract(
-        abi,
-        "0x1c4F3caF901c1AA1d225Fb9F436d1B93A3346b7F",
-        { data: "" }
-      );
-      setContract(nftMarket);
-    }
+    const slice1 = user.account.slice(0, 5);
+    const slice2 = user.account.slice(-5);
+    const joinAccount = slice1 + "..." + slice2;
+    setSessionUser(joinAccount);
   }, [web3]);
 
-  const handleConnectwallet = () => {};
+  const handleAccoutCopy = () => {
+    navigator.clipboard.writeText(user.account);
+  };
 
   return (
     <HeaderWrap>
@@ -75,8 +70,17 @@ const Header = () => {
       <HeaderRightWrap>
         <Group>
           {/* 메타마스크 연결되있으면 계정이 보이고 연결안되있으면 버튼으로 보임 */}
-          <div className="connectWallet" onClick={handleConnectwallet}>
-            <span>Connect Wallet</span>
+          {/* {!sessionUser ? (
+            <div className="connectWallet" onClick={handleConnectwallet}>
+              <span>Connect Wallet</span>
+            </div>
+          ) : (
+            <div className="connectedWallet">
+              <span>{sessionUser}</span>
+            </div>
+          )} */}
+          <div className="connectedWallet" onClick={handleAccoutCopy}>
+            <span>{sessionUser}</span>
           </div>
           <div className="downloadapp">
             <img

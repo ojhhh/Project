@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Header from "../Header/Header.js";
 import {
   ProductPageWrap,
@@ -17,8 +17,18 @@ import {
 import { Link } from "react-router-dom";
 
 import Card from "../../components/card/Card";
+import Global from "../../Global.js";
+import axios from "axios";
+
+const ipfsAddress = process.env.REACT_APP_IPFS_ADDRESS;
 
 const ProductPage = () => {
+  const { user, web3, contract, nftlist } = useContext(Global);
+
+  useEffect(() => {
+    console.log("nftlist : ", nftlist);
+  }, []);
+
   return (
     <>
       <Header />
@@ -149,7 +159,8 @@ const ProductPage = () => {
             </ProductPageMainBtns>
             <ProductPageMain>
               {/* CardComponent start */}
-              <Card />
+              {/*  */}
+              {nftlist ? <Card nftlist={nftlist} /> : null}
             </ProductPageMain>
           </ProductPageMainWrap>
         </ProductPageBodyWrap>

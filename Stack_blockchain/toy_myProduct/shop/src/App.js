@@ -1,15 +1,92 @@
 import "./App.css";
-import { Router, Routes, Route, Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import MyPage from "./pages/MyPage/MyPage";
 import ProductPage from "./pages/ProductPage/ProductPage";
+import Global from "./Global";
+import useWeb3 from "./hooks/web3.hook";
+import abi from "./abi/ShopNFT.json";
+import axios from "axios";
+
+const ipfsAddress = process.env.REACT_APP_IPFS_ADDRESS;
 
 function App() {
+  const { user, web3 } = useWeb3();
+
+  const [sessionUser, setSessionUser] = useState(null);
+
+  const [contract, setContract] = useState(null);
+  const [balance, setBalance] = useState("0");
+  const [nftlist, setNftlist] = useState([]);
+
+  useEffect(() => {
+    if (web3) {
+      if (contract) return;
+
+      const shopNFT = new web3.eth.Contract(
+        abi,
+        "0xA298Ae298b2f5bbb2628f7b1C6a1c31bd16A1674",
+        { data: "" }
+      );
+      setContract(shopNFT);
+      // 단위 eth로 변경
+      (async () => {
+        const changeETH = await web3.eth.getBalance(user.account);
+        const _changeETH = await web3.utils.fromWei(changeETH, "ether");
+
+        setBalance(_changeETH);
+      })();
+    }
+  }, [web3]);
+
+  useEffect(() => {
+    try {
+      getAllNFT();
+    } catch (error) {
+      console.error(error);
+    }
+  }, [contract]);
+
+  const getAllNFT = async () => {
+    try {
+      if (!contract) return;
+      const result = await contract.methods.getAllNFT().call();
+      const nfts = [];
+      for (let i = 0; i < result.length; i++) {
+        const url = `${ipfsAddress}${result[i]}`;
+
+        const { data } = await axios.get(url);
+        nfts.push(data);
+      }
+      setNftlist(nfts);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {}, [nftlist]);
+
+  const obj = {
+    user,
+    web3,
+    sessionUser,
+    setSessionUser,
+    contract,
+    setContract,
+    balance,
+    setBalance,
+    nftlist,
+    setNftlist,
+  };
+
   return (
     <>
-      <Routes>
-        <Route path="/" element={<ProductPage />} />
-        <Route path="/mypage" element={<MyPage />} />
-      </Routes>
+      <Global.Provider value={obj}>
+        <Routes>
+          <Route path="/" element={<ProductPage />} />
+          <Route path="/mypage" element={<MyPage />} />
+        </Routes>
+      </Global.Provider>
     </>
   );
 }

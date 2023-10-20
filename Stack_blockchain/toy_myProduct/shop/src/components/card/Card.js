@@ -1,19 +1,21 @@
 import React from "react";
 import { ProductCard, Group } from "./Card.styled";
 
-const Card = () => {
-  return (
-    <ProductCard>
+const Card = ({ nftlist }) => {
+  console.log("nftlist : ", nftlist);
+
+  return nftlist.map((item, index) => (
+    <ProductCard key={index}>
       <div className="cardImg">
         {/* 이미지 경로 바꾸기 */}
-        <img src={`${process.env.PUBLIC_URL}/images/test.png`} alt="" />
+        <img src={`${item.image}`} alt="" />
       </div>
       <div className="cardText">
         <div className="nftTitle">
-          <span>#1</span>
+          <span>{item.name}</span>
         </div>
         <div className="nftOwner">
-          <span>account</span>
+          <span>{item.owner.slice(0, 5) + "..." + item.owner.slice(-4)}</span>
         </div>
         <div className="nftPrice">
           <Group>
@@ -24,7 +26,7 @@ const Card = () => {
               src={`${process.env.PUBLIC_URL}/images/ether_price.png`}
               alt=""
             />
-            <span>0.001</span>
+            <span>{item.price / 1000}</span>
           </Group>
         </div>
         <div className="buyBtn">
@@ -32,7 +34,7 @@ const Card = () => {
         </div>
       </div>
     </ProductCard>
-  );
+  ));
 };
 
 export default Card;

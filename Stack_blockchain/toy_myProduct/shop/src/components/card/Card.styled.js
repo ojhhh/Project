@@ -16,6 +16,7 @@ export const ProductCard = styled.div`
     width: 100%;
     height: 220px;
     overflow: hidden;
+    box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.2);
   }
   & .cardImg img {
     width: 100%;

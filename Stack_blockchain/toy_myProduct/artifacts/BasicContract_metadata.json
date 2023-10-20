@@ -256,6 +256,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "getTokenIdLength",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -724,11 +737,11 @@
 			]
 		},
 		"basicContract.sol": {
-			"keccak256": "0x5bbdf80d280e989a657e2fee9744946927a74934991d0cb2acf6d1f84f71ac5d",
+			"keccak256": "0x507afa02e64e39570b9f63a046c4ea84f73ef5997c49ad68d2cbdc4e89d2fea9",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://b28cd06bb58bb6cabae9be7daa6af3ca77fb74429c1320a0c9df2a1f6aaf9246",
-				"dweb:/ipfs/QmS7S94AXja2fWumH5HozxKvUAkU1i6ts8rMnbQLtRtzeY"
+				"bzz-raw://3ee05d17b56365bd65a88a19bd484b829c2e44dc0d86f860450f7d3f8a6cedf9",
+				"dweb:/ipfs/QmY1kBkYtBvXmcZvJ9JCjkV4EEyrwxD7LyvVyYNJz8mtmx"
 			]
 		}
 	},

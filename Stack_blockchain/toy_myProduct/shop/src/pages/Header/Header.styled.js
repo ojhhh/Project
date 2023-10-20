@@ -98,6 +98,20 @@ export const HeaderRightWrap = styled.div`
     font-weight: 600;
   }
 
+  & .connectedWallet {
+    width: 120px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border-radius: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+  }
+  & .connectedWallet span {
+    color: white;
+    font-weight: 600;
+  }
+
   & .downloadapp,
   .alarm,
   .support,

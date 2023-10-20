@@ -15,14 +15,14 @@ export const MyPageWrap = styled.div``;
 
 export const MyPageProfile = styled.div`
   width: 100%;
-  height: 250px;
+  height: 220px;
   border: 1px solid;
   background-image: url(${process.env
     .PUBLIC_URL}/images/okx_top_backgroundimage.webp);
   background-size: cover;
   & .profileWrap {
     width: 1440px;
-    height: 280px;
+    height: 220px;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -159,6 +159,7 @@ export const BodyTabs = styled.div`
   align-items: center;
   justify-content: space-between;
   & .callectedTab,
+  .MyNftTab,
   .activityTab,
   .nftordersTab {
     height: 60px;
@@ -166,22 +167,39 @@ export const BodyTabs = styled.div`
     align-items: center;
     margin-right: 20px;
   }
-  & .callectedTab {
-    border-bottom: 2px solid;
-  }
   & .callectedTab span,
+  .MyNftTab span,
   .activityTab span,
   .nftordersTab span {
     font-size: 18px;
     font-weight: 500;
     cursor: pointer;
   }
+  & .callectedTab {
+    border-bottom: ${(props) =>
+      props.tabs === "Callected" ? "2px solid" : "none"};
+  }
+  & .callectedTab span {
+    color: ${(props) =>
+      props.tabs === "Callected" ? null : "rgba(0, 0, 0, 0.4)"};
+  }
+  & .MyNftTab {
+    border-bottom: ${(props) =>
+      props.tabs === "MyNFTs" ? "2px solid" : "none"};
+  }
+  & .MyNftTab span {
+    color: ${(props) =>
+      props.tabs === "MyNFTs" ? null : "rgba(0, 0, 0, 0.4)"};
+  }
   & .activityTab span,
   .nftordersTab span {
     color: rgba(0, 0, 0, 0.4);
   }
+  & .callectedTab span {
+  }
 
-  & .activityTab span:hover,
+  & .MyNftTab span:hover,
+  .activityTab span:hover,
   .nftordersTab span:hover {
     color: rgba(0, 0, 0, 1);
   }
