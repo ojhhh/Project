@@ -1,18 +1,37 @@
-import React from "react";
+import React, { useContext } from "react";
+import Global from "../../Global";
 import { ProductCard, Group } from "./Card.styled";
 
 const Card = ({ nftlist }) => {
-  console.log("nftlist : ", nftlist);
+  const { user, web3, contract } = useContext(Global);
+
+  const handleBuyNFT = async (tokenId) => {
+    try {
+      console.log("tokenId :", tokenId);
+
+      const ether = 0.001;
+      const _ether = await web3.utils.toWei(ether.toString(), "ether");
+      console.log("_ether value:", _ether);
+
+      const buynft = await contract.methods
+        .buyNFT(tokenId)
+        .send({ from: user.account, value: _ether });
+
+      console.log("buynft : ", buynft);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return nftlist.map((item, index) => (
-    <ProductCard key={index}>
+    <ProductCard key={index} onClick={() => handleBuyNFT(item.tokenId)}>
       <div className="cardImg">
         {/* 이미지 경로 바꾸기 */}
         <img src={`${item.image}`} alt="" />
       </div>
       <div className="cardText">
         <div className="nftTitle">
-          <span>{item.name}</span>
+          <span>{item.name + "#" + item.tokenId}</span>
         </div>
         <div className="nftOwner">
           <span>{item.owner.slice(0, 5) + "..." + item.owner.slice(-4)}</span>

@@ -11,6 +11,7 @@ import {
 } from "./MyPage.styled";
 import Header from "../Header/Header";
 import BuyCard from "../../components/card/BuyCard";
+import MyCard from "../../components/card/MyCard";
 import SalePopup from "../popup/SalePopup";
 import Global from "../../Global";
 
@@ -20,7 +21,7 @@ const MyPage = () => {
   const [salePop, setSalePop] = useState(false);
   const [tabs, setTabs] = useState("Callected");
 
-  const salePopHandler = () => {
+  const handleSalePop = () => {
     setSalePop(!salePop);
   };
 
@@ -36,8 +37,6 @@ const MyPage = () => {
     }
   }, [contract]);
 
-  useEffect(() => {}, [salePop]);
-
   const handleAccoutCopy = () => {
     navigator.clipboard.writeText(user.account);
   };
@@ -49,7 +48,7 @@ const MyPage = () => {
 
   return (
     <>
-      {salePop ? <SalePopup salePopHandler={salePopHandler} /> : null}
+      {salePop ? <SalePopup handleSalePop={handleSalePop} /> : null}
       <Header />
       <MyPageWrap>
         <MyPageProfile>
@@ -118,7 +117,7 @@ const MyPage = () => {
             </Group>
             <Group>
               {/* 판매하기 버튼 기능 추가 예정 */}
-              <div onClick={salePopHandler} className="saleBtn">
+              <div onClick={handleSalePop} className="saleBtn">
                 <span>NFT MITING</span>
               </div>
             </Group>
@@ -153,7 +152,7 @@ const MyPage = () => {
           </BodyFilter>
 
           <MyPageCard>
-            {tabs == "Callected" ? <BuyCard /> : null}
+            {tabs == "Callected" ? <BuyCard /> : <MyCard />}
             {/* <MyCard /> */}
           </MyPageCard>
         </MyPageBody>

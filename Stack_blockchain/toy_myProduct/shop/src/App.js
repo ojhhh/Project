@@ -25,7 +25,7 @@ function App() {
 
       const shopNFT = new web3.eth.Contract(
         abi,
-        "0xA298Ae298b2f5bbb2628f7b1C6a1c31bd16A1674",
+        "0xB977889E6507a875CF4eda4a82E95bbF482ba735",
         { data: "" }
       );
       setContract(shopNFT);
@@ -41,16 +41,16 @@ function App() {
 
   useEffect(() => {
     try {
-      getAllNFT();
+      getAllOwner();
     } catch (error) {
       console.error(error);
     }
   }, [contract]);
 
-  const getAllNFT = async () => {
+  const getAllOwner = async () => {
     try {
       if (!contract) return;
-      const result = await contract.methods.getAllNFT().call();
+      const result = await contract.methods.getAllOwner().call();
       const nfts = [];
       for (let i = 0; i < result.length; i++) {
         const url = `${ipfsAddress}${result[i]}`;

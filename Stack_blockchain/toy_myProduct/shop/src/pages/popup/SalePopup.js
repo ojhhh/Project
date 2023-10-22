@@ -14,7 +14,7 @@ const pinata_secret_api_key = process.env.REACT_APP_PINATA_SECRET_API_KEY;
 const json_url = process.env.REACT_APP_JSON_URL;
 const images_url = process.env.REACT_APP_IPFS_ADDRESS;
 
-const SalePopup = ({ salePopHandler }) => {
+const SalePopup = ({ handleSalePop }) => {
   const [fileHash, setFileHash] = useState();
   const [jsonHash, setJsonHash] = useState();
   const [file, setFile] = useState();
@@ -56,6 +56,7 @@ const SalePopup = ({ salePopHandler }) => {
       if (resp) {
         const { data } = resp;
         setFileHash(data.IpfsHash);
+        await getTokenIdLength();
       }
     } catch (error) {
       console.error(error);
@@ -71,6 +72,7 @@ const SalePopup = ({ salePopHandler }) => {
           owner: user.account,
           image: `${images_url}` + fileHash,
           price: nftPrice * 1000,
+          tokenId: nftTokenId,
         },
         pinataMetadata: {
           name: jsonFileName,
@@ -85,10 +87,7 @@ const SalePopup = ({ salePopHandler }) => {
         },
       });
 
-      console.log("result : ", result);
-
       if (result) {
-        await getTokenIdLength();
         const { data } = result;
         setJsonHash(data.IpfsHash);
       }
@@ -104,8 +103,12 @@ const SalePopup = ({ salePopHandler }) => {
   };
 
   const handleMinting = async () => {
-    await contract.methods.minting(jsonHash).send({ from: user.account });
-    return alert("민팅성공");
+    try {
+      await contract.methods.minting(jsonHash).send({ from: user.account });
+      return alert("민팅성공");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -113,7 +116,7 @@ const SalePopup = ({ salePopHandler }) => {
       <PopupMain>
         <PopupTitle>
           <h2>NFT MITING</h2>
-          <div onClick={salePopHandler} className="popupClose">
+          <div onClick={handleSalePop} className="popupClose">
             <div className="xBtn" />
           </div>
         </PopupTitle>
