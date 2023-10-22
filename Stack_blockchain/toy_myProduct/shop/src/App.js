@@ -25,7 +25,7 @@ function App() {
 
       const shopNFT = new web3.eth.Contract(
         abi,
-        "0xB977889E6507a875CF4eda4a82E95bbF482ba735",
+        "0x993173C6bfCfB7B0590dE37d5F491BA04447CA95",
         { data: "" }
       );
       setContract(shopNFT);

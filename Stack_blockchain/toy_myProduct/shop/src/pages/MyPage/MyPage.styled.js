@@ -213,6 +213,7 @@ export const BodyTabs = styled.div`
     place-items: center;
     cursor: pointer;
     animation: ${pulseAnimation} 2s infinite;
+    margin-left: 10px;
   }
   & .saleBtn:hover {
     border: 1px solid;

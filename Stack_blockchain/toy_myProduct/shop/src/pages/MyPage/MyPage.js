@@ -41,6 +41,12 @@ const MyPage = () => {
     navigator.clipboard.writeText(user.account);
   };
 
+  const handleAccept = async () => {
+    const receipt = await contract.methods
+      .acceptNFT(1)
+      .send({ from: user.account });
+  };
+
   const handleSelectTab = (e) => {
     const tab = e.target.innerHTML;
     setTabs(tab);
@@ -116,7 +122,9 @@ const MyPage = () => {
               </div>
             </Group>
             <Group>
-              {/* 판매하기 버튼 기능 추가 예정 */}
+              <div onClick={handleAccept} className="saleBtn">
+                <span>Sales Amount</span>
+              </div>
               <div onClick={handleSalePop} className="saleBtn">
                 <span>NFT MITING</span>
               </div>

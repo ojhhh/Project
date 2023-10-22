@@ -658,6 +658,25 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "salesAmount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "salesNFT",
 				"outputs": [
@@ -745,6 +764,25 @@
 						"internalType": "string",
 						"name": "",
 						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "tokenPrices",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -1045,11 +1083,11 @@
 			]
 		},
 		"shopNFT.sol": {
-			"keccak256": "0x5f27fa48181d6ab8cc329e97ae98ca5589aa8b5a0ad2ccd5ec1073ea9bb047dc",
+			"keccak256": "0xee23d808b6fdd812e6cd976dd20434ce1312707cd3e785688f4ec54893ad39de",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://7d5456481e6454af9b0e607446e86a5e1e3ecfd38ab7ce400cbd163ca2c3eadb",
-				"dweb:/ipfs/QmS12ZJD1WRBkCAnC339NpR8t5GHiW8uHahY5PcrnaPWUV"
+				"bzz-raw://526c7abfff6afdb7fd103b76c6986989ce43abe60f7678f080b6dc445bc41397",
+				"dweb:/ipfs/QmXRf5HQJNeaBjT368XtUyq1ndBJqsNosyQcs4kB159izp"
 			]
 		}
 	},

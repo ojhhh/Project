@@ -7,15 +7,14 @@ const Card = ({ nftlist }) => {
 
   const handleBuyNFT = async (tokenId) => {
     try {
-      console.log("tokenId :", tokenId);
+      const ownerOf = await contract.methods.ownerOf(tokenId).call();
 
       const ether = 0.001;
       const _ether = await web3.utils.toWei(ether.toString(), "ether");
-      console.log("_ether value:", _ether);
 
       const buynft = await contract.methods
         .buyNFT(tokenId)
-        .send({ from: user.account, value: _ether });
+        .send({ from: user.account, gas: "300000", value: _ether });
 
       console.log("buynft : ", buynft);
     } catch (error) {

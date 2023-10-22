@@ -31,6 +31,10 @@ contract ShopNFT is ERC721 {
 
     mapping(uint256 _id => address) public _getBuylist;
 
+    mapping(uint256 => uint256) public tokenPrices;
+
+    mapping(address => uint256) public salesAmount;
+
     nftData[] public _nftData;
     buyList[] public _buylist;
 
@@ -46,6 +50,7 @@ contract ShopNFT is ERC721 {
         });
 
         _nftData.push(newData);
+        tokenPrices[_id] = 0.001 ether;
         _id += 1;
     }
 
@@ -127,10 +132,7 @@ contract ShopNFT is ERC721 {
         address owner = ownerOf(_tokenId);
         require(msg.sender != owner);
 
-        uint256 _Price = 0.001 ether;
-        require(msg.value == _Price, "0.001 ether");
-        payable(owner).transfer(msg.value);
-        transferFrom(owner, msg.sender, _tokenId);
+        salesAmount[owner] += msg.value;
 
         buyList memory newbuylist = buyList({
             tokenId: _tokenId,
@@ -143,25 +145,16 @@ contract ShopNFT is ERC721 {
     }
 
     // NFT 구매 승인
-    function acceptNFT(uint256 _tokenId) public {
-        address owner = ownerOf(_tokenId);
+    function acceptNFT(uint256 _tokenId) external {
+        buyList memory accepted = _buylist[_tokenId];
+        address owner = ownerOf(accepted.tokenId);
+
         require(msg.sender == owner);
+        require(!accepted.accept);
 
-        buyList memory pending;
-        bool accept = false;
-
-        for (uint i = 0; i < _buylist.length; i++) {
-            if (_buylist[i].tokenId == _tokenId && !_buylist[i].accept) {
-                pending = _buylist[i];
-                _buylist[i].accept = true;
-                accept = true;
-                break;
-            }
-        }
-
-        require(accept);
-
-        payable(owner).transfer(pending.price);
-        transferFrom(owner, pending.offer, _tokenId);
+        salesAmount[owner] += accepted.price;
+        _transfer(owner, accepted.offer, accepted.tokenId);
+        accepted.accept = true;
+        _buylist[_tokenId] = accepted;
     }
 }
