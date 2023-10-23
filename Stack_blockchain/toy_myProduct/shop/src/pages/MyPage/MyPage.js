@@ -32,7 +32,7 @@ const MyPage = () => {
           .balanceOf(user.account)
           .call({ from: user.account });
 
-        console.log("balanceOf : ", parseInt(balanceOf));
+        // console.log("balanceOf : ", parseInt(balanceOf));
       })();
     }
   }, [contract]);
@@ -43,7 +43,7 @@ const MyPage = () => {
 
   const handleAccept = async () => {
     const receipt = await contract.methods
-      .acceptNFT(1)
+      .acceptNFT(3)
       .send({ from: user.account });
   };
 

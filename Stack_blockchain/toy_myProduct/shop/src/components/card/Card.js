@@ -16,7 +16,7 @@ const Card = ({ nftlist }) => {
         .buyNFT(tokenId)
         .send({ from: user.account, gas: "300000", value: _ether });
 
-      console.log("buynft : ", buynft);
+      // console.log("buynft : ", buynft);
     } catch (error) {
       console.error(error);
     }

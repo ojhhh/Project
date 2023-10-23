@@ -51,7 +51,7 @@ const SalePopup = ({ handleSalePop }) => {
         },
       });
 
-      console.log("resp : ", resp);
+      // console.log("resp : ", resp);
 
       if (resp) {
         const { data } = resp;
