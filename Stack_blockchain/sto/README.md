@@ -76,3 +76,7 @@
 - 토큰 내/외부 전송관련 transactions를 감시하여 from, to, value를 추적하는건 성공했지만 어떤 토큰인지(symbol) 알지 못하는 상황 발생
 - erc20 토큰에 transfer 부분에 이벤트를 추가하여 from, to, value, symbol을 띄우게 하여 transaction의 hash를 가져와 receipt 안에 logs를 확인 하는 식으로 구현
 - ganache 환경으로 테스트 진행 중
+
+### 2023/11/19
+
+- 로그인 방법 구상 및 브런치 merge 작업 진행
