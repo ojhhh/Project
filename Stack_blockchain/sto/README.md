@@ -2,6 +2,8 @@
 
 - figma : https://www.figma.com/file/aBMZ7hFxCcddiVapcRQxbY/bounceCode_STO%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8?type=design&node-id=1%3A2&mode=design&t=zW7U2zUvKLzE1cEA-1
 - ERD : https://dbdiagram.io/d/6541ab467d8bbd64653cf50b
+- 사용자 페이지 웹/앱 : https://bouncesto.site
+- 어드민 페이지 : https://bs.admin.bouncesto.site/admin/dashboard
 
 ### 2023/11/06
 
@@ -162,3 +164,7 @@
 
 - 프로젝트 발표 후 리펙토링 할 부분 정리
 - 클래스 구조에 대한 학습 및 클래스 구조로 변경 해볼 예정
+
+### 2023/12/07
+
+- 저장소 위치 변경 테스트
