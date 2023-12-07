@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "outDir": "./dist",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "paths": {
+      "@openzeppelin/*": ["./node_modules/@openzeppelin"]
+    },
+    "moduleResolution": "node"
+  },
+  "include": ["**/app.ts"],
+  "exclude": ["node_modules"],
+}
