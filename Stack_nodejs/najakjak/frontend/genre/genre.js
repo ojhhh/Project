@@ -1,11 +1,11 @@
-const backend = "http://najakjak.store";
-const frontend = "/";
+const backend = "http://127.0.0.1:8080";
+const frontend = "/frontend";
 
 async function logincheck() {
   // const at = document.cookie.slice(8);
   // console.log(at);
 
-  const  data  = await axios.get(`${backend}/main/logincheck`, {
+  const data = await axios.get(`${backend}/main/logincheck`, {
     // 이게 rawheader에 쿠키를 저장하는 역할
     withCredentials: true,
   });
@@ -15,12 +15,12 @@ async function logincheck() {
 
   if (role == "writer") {
     who = "작가";
-  } 
-  if (role == "reader"){
+  }
+  if (role == "reader") {
     who = "독자";
   }
-  if (role == "testadmin"){
-    who ="관리자"
+  if (role == "testadmin") {
+    who = "관리자";
   }
 
   if (data.data == "relogin") {
@@ -28,7 +28,6 @@ async function logincheck() {
     signUp.style.display = "block";
     nick.style.display = "none";
     logout.style.visibility = "hidden";
-
   } else {
     login.style.display = "none";
     signUp.style.display = "none";

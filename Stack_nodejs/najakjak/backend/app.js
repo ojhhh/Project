@@ -26,12 +26,11 @@ const bodyParser = require("body-parser");
 const viewRouter = require("./routers/viewRouter");
 const checkRouter = require("./routers/checklist");
 const chatRouter = require("./routers/chatRouter");
-const buyRouter = require("./routers/buyRouter")
+const buyRouter = require("./routers/buyRouter");
 // ===========================================
 const paymentRouter = require("./routers/paymentRouter");
 // ===========================================
 const followRouter = require("./routers/follow");
-
 
 app.use(bodyParser.json());
 
@@ -61,7 +60,7 @@ app.get("/", (req, res) => {
 
 app.use(
   cors({
-    origin: "http://najakjak.store",
+    origin: ["http://127.0.0.1:8080", "http://127.0.0.1:5500"],
     credentials: true,
   })
 );
@@ -91,8 +90,8 @@ app.use("/allview", allview);
 app.use("/view", viewRouter);
 app.use("/check", checkRouter);
 app.use("/chat", chatRouter);
-app.use("/follow",followRouter);
-app.use("/buy",buyRouter);
+app.use("/follow", followRouter);
+app.use("/buy", buyRouter);
 
 // ===========================================
 app.use("/v1/payment", paymentRouter);

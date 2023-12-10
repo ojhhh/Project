@@ -3,23 +3,23 @@
   width: 150px;
   height: 80px;
 }
-#isLoading{
+#isLoading {
   background-color: white;
   width: 100%;
   height: 100%;
   position: fixed;
-  top :0;
+  top: 0;
   left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1;
 }
-#isLoading img{
+#isLoading img {
   width: 300px;
 }
-#isLoading.disable{
-  display : none;
+#isLoading.disable {
+  display: none;
 }
 body {
   padding: 0;
@@ -57,16 +57,14 @@ body {
   border-radius: 10px;
 }
 
-.content{
-    background-color: white;
-    height: 800px;
-    width: 800px;
-    border: 1px solid rgb(158, 158, 158);
-    position: relative;
-
-
+.content {
+  background-color: white;
+  height: 800px;
+  width: 800px;
+  border: 1px solid rgb(158, 158, 158);
+  position: relative;
 }
-.userClick{
+.userClick {
   position: relative;
 }
 #user_agree,
@@ -87,7 +85,6 @@ body {
 }
 
 #tab_title {
-
   width: 780px;
   height: 10%;
   background-color: rgb(208, 208, 208);
@@ -105,31 +102,29 @@ body {
   height: 90%;
   margin: 0 auto;
 }
-#main_content3{
+#main_content3 {
   width: 800px;
   height: 690px;
   /* border: 1px solid red; */
 }
 
-#chat_list{
+#chat_list {
   width: 390px;
   height: 100%;
-    /* border: 1px solid blue; */
+  /* border: 1px solid blue; */
 }
-#chat_list li{
+#chat_list li {
   list-style-type: none;
   width: 388px;
   height: 50px;
   border: 1px solid gray;
   margin-left: -40px;
   text-align: center;
-  
-
 }
-#chat_list > span{
+#chat_list > span {
   line-height: 50px;
 }
-#chat_room{
+#chat_room {
   position: relative;
   width: 408px;
   height: 697px;
@@ -139,17 +134,16 @@ body {
   border: 1px solid border;
 }
 
-#who_room{
+#who_room {
   width: 100px;
   height: 30px;
   /* border: 1px solid black; */
   margin: 0 auto;
   text-align: center;
   line-height: 30px;
-
 }
 
-.zeroCnt{
+.zeroCnt {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -161,7 +155,6 @@ body {
   background-color: red;
   color: white;
   line-height: 50px;
-  
 }
 .tb {
   border: 1px solid black;
@@ -188,81 +181,79 @@ body {
   width: 90px;
 }
 
-.accept,.reject{
-    margin-left: 10px;
-    margin-top: 11px;
-    width: 75px;
-    height: 25px;
-    background-image: url("http://najakjak.store/img/accept.jpg");
-    background-size:  contain;
-    border: 0;
-    background-repeat: no-repeat;
+.accept,
+.reject {
+  margin-left: 10px;
+  margin-top: 11px;
+  width: 75px;
+  height: 25px;
+  background-image: url("http://127.0.0.1:8080/img/accept.jpg");
+  background-size: contain;
+  border: 0;
+  background-repeat: no-repeat;
 }
-.accept2,.reject2{
-    margin-left: 10px;
-    margin-top: 11px;
-    width: 75px;
-    height: 25px;
-    background-image: url("http://najakjak.store/img/accept.jpg");
-    background-size:  contain;
-    border: 0;
-    background-repeat: no-repeat;
+.accept2,
+.reject2 {
+  margin-left: 10px;
+  margin-top: 11px;
+  width: 75px;
+  height: 25px;
+  background-image: url("http://127.0.0.1:8080/img/accept.jpg");
+  background-size: contain;
+  border: 0;
+  background-repeat: no-repeat;
 }
-.reject{
-    background-image: url("http://najakjak.store/img/reject.jpg");
+.reject {
+  background-image: url("http://127.0.0.1:8080/img/reject.jpg");
 }
-.reject2{
-    background-image: url("http://najakjak.store/img/reject.jpg");
-}
-
-
-.book_img{
-    width: 250px;
-    height: 300px;
-    text-align: center;
-
-
-}
-.book_img img{
-    width: 200px;
-    height: 200px;
-}
-#main_content2{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    overflow: scroll;
-    height: 700px;
-}
-.book_title{
-    width: 250px;
-    height: 50px;
-    text-align: left;
+.reject2 {
+  background-image: url("http://127.0.0.1:8080/img/reject.jpg");
 }
 
-#reject_reason{
-    /* width: 800px;
+.book_img {
+  width: 250px;
+  height: 300px;
+  text-align: center;
+}
+.book_img img {
+  width: 200px;
+  height: 200px;
+}
+#main_content2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  overflow: scroll;
+  height: 700px;
+}
+.book_title {
+  width: 250px;
+  height: 50px;
+  text-align: left;
+}
+
+#reject_reason {
+  /* width: 800px;
     height: 670px; */
-    width: 400px;
-    height: 200px;
-    border: 1px solid black;
-    border-radius: 30px;
-    position: absolute;
-    top:300px;
-    left: 200px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: rgba(75, 75, 75, 0.733);
+  width: 400px;
+  height: 200px;
+  border: 1px solid black;
+  border-radius: 30px;
+  position: absolute;
+  top: 300px;
+  left: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgba(75, 75, 75, 0.733);
 }
-#reject_reason input{
-    width: 300px;
-    height: 30px;
-    border: 1px solid blue;
-    
+#reject_reason input {
+  width: 300px;
+  height: 30px;
+  border: 1px solid blue;
 }
 
-#reject_reason label{
-    color : white
+#reject_reason label {
+  color: white;
 }

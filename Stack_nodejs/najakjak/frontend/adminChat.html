@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="./css/chat.css" />
-    <script src="http://localhost:8080/socket.io/socket.io.js"></script>
+    <script src="http://127.0.0.1:8080/socket.io/socket.io.js"></script>
   </head>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <body>
@@ -40,7 +40,7 @@
   <script>
     window.onload = ()=>{
 
-  const socket = io.connect("http://localhost:8080");
+  const socket = io.connect("http://127.0.0.1:8080");
   let chat_id;  
   const user_name = "admin";
   let userTemp;

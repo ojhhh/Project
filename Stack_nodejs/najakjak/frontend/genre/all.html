@@ -6,21 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>main</title>
     <link rel="stylesheet" href="../css/index.css" />
-    <link rel="stylesheet" href="../css/chat.css">
+    <link rel="stylesheet" href="../css/chat.css" />
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
-    <div id ="isLoading">
-      <img src="http://najakjak.store/img/boxloading.gif" alt="">
-  
-      </div>
+    <div id="isLoading">
+      <img src="http://127.0.0.1:8080/img/boxloading.gif" alt="" />
+    </div>
     <!-- 로고 부분 -->
     <div class="nav">
       <div class="logoBox">
-        <a href="/index.html"
+        <a href="/frontend/index.html"
           ><img
-            src="http://najakjak.store/img/Black logo - no background.png"
+            src="http://127.0.0.1:8080/img/Black logo - no background.png"
             alt=""
         /></a>
 
@@ -36,13 +35,19 @@
       </div>
       <div class="toggle">
         <div class="genre">
-          <span id="all"><a href="/genre/all.html">전체</a></span>
-          <span id="conan"><a href="/genre/conan.html">추리</a></span>
-          <span id="horror"><a href="/genre/horror.html">공포•스릴러</a></span>
-          <span id="fantasy"><a href="/genre/fantasy.html">판타지</a></span>
-          <span id="sorim"><a href="/genre/sorim.html">무협</a></span>
-          <span id="game"><a href="/genre/game.html">게임</a></span>
-          <span id="romance"><a href="/genre/romance.html">로맨스</a></span>
+          <span id="all"><a href="/frontend/genre/all.html">전체</a></span>
+          <span id="conan"><a href="/frontend/genre/conan.html">추리</a></span>
+          <span id="horror"
+            ><a href="/frontend/genre/horror.html">공포•스릴러</a></span
+          >
+          <span id="fantasy"
+            ><a href="/frontend/genre/fantasy.html">판타지</a></span
+          >
+          <span id="sorim"><a href="/frontend/genre/sorim.html">무협</a></span>
+          <span id="game"><a href="/frontend/genre/game.html">게임</a></span>
+          <span id="romance"
+            ><a href="/frontend/genre/romance.html">로맨스</a></span
+          >
         </div>
       </div>
     </div>
@@ -73,37 +78,34 @@
         <div id="starList"></div>
       </div>
     </div> -->
-
   </body>
   <script src="./genre.js"></script>
   <script src="../js/chat.js"></script>
   <script>
     async function ta() {
-        const { data } = await axios.get(`${backend}/allview/all`, {
-          withCredentials: true,
-        });
-        //console.log(data)
-        return data.length;
+      const { data } = await axios.get(`${backend}/allview/all`, {
+        withCredentials: true,
+      });
+      //console.log(data)
+      return data.length;
+    }
+    async function readmore(cntt) {
+      const plusCard = document.querySelector(".plusCard");
+      plusCard.style.display = "none";
+      viewList.innerHTML = "";
+      //console.log(await ta());
+      const taa = await ta();
+      //console.log(taa);
+      cnt.innerText = cntt + 9;
+      const { data } = await axios.get(`${backend}/allview/all2`, {
+        withCredentials: true,
+        params: {
+          id: cntt,
+        },
+      });
 
-      }
-      async function readmore(cntt) {
-
-        const plusCard = document.querySelector(".plusCard");
-        plusCard.style.display = 'none';
-        viewList.innerHTML = "";
-        //console.log(await ta());
-        const taa = await ta();
-        //console.log(taa);
-        cnt.innerText = cntt + 9;
-        const { data } = await axios.get(`${backend}/allview/all2`, {
-          withCredentials: true,
-          params: {
-            id: cntt,
-          },
-        });
-
-        data.forEach((el, index) => {
-          viewList.innerHTML += `<a href="${frontend}view.html?id=${el.id}"><div class="viewCard">
+      data.forEach((el, index) => {
+        viewList.innerHTML += `<a href="${frontend}view.html?id=${el.id}"><div class="viewCard">
                 <img src="${backend}/${el.img}" alt="" />
                 <div class="cardText">
                 <span>☻</span>
@@ -111,23 +113,24 @@
                 <span>${el.title}</span>
                 </div> 
                 </div></a>`;
-          if (index % 10 == 8 && index > cntt && taa > cntt + 9) {
-            viewList.innerHTML += `<div class="plusCard" onclick="readmore(${index + 2})">
+        if (index % 10 == 8 && index > cntt && taa > cntt + 9) {
+          viewList.innerHTML += `<div class="plusCard" onclick="readmore(${
+            index + 2
+          })">
                     <img src="${backend}/img/pluss.png" alt="" >
                     </div>`;
-          }
-        })
-      }
+        }
+      });
+    }
     window.onload = async () => {
       // window.location.href="/genre/all.html"
 
       viewList.innerHTML = "";
-      const { data } = await axios.get(`${backend}/allview/all2`,{
-        withCredentials : true,
+      const { data } = await axios.get(`${backend}/allview/all2`, {
+        withCredentials: true,
       });
 
       //console.log(data);
-
 
       // const toggle = document.querySelector(".toggle");
 
@@ -144,16 +147,16 @@
         </div></a>`;
 
         if (index % 10 == 8) {
-            viewList.innerHTML += `<div class="plusCard" onclick="readmore(${index+2})">
+          viewList.innerHTML += `<div class="plusCard" onclick="readmore(${
+            index + 2
+          })">
           <img src="${backend}/img/pluss.png" alt="" >
           </div>`;
-
-          }
+        }
       });
       cnt.innerText = data.length;
 
       isLoading.classList.add("disable");
-
     };
   </script>
 </html>
