@@ -9,19 +9,16 @@ async function admincheck() {
     //  : {token : at, jojojojojojoj : "kjiljlkjlkjkl"},
   });
 
-  if(data.data=="undi"){
+  if (data.data == "undi") {
     alert("어드민 계정으로 로그인하세요");
     window.location.href = `${frontend}login.html`;
-  }
-  else if(data.data=="admin"){
+  } else if (data.data == "admin") {
     isLoading.classList.add("disable");
   }
-
 }
 admincheck();
 
 window.onload = async () => {
-
   tab_title.innerText = "가입 승인";
   user_agree.style.color = "black";
   post_agree.style.color = "rgb(158, 158, 158)";
@@ -37,8 +34,7 @@ window.onload = async () => {
 
   if (data.data.length == 0) {
     isLoading.classList.add("disable");
-    return main_content.innerHTML = `가입 승인 대기중인 유저가 없습니다.`;
-
+    return (main_content.innerHTML = `가입 승인 대기중인 유저가 없습니다.`);
   }
 
   main_content.innerHTML = `
@@ -116,13 +112,11 @@ window.onload = async () => {
           }
         });
 
-
-        
         location.reload();
       };
     });
   });
-  
+
   // isLoading.classList.add("disable");
 };
 user_agree.onclick = async () => {
@@ -132,7 +126,7 @@ user_agree.onclick = async () => {
   chat_agree.style.color = "rgb(158, 158, 158)";
 
   // main_content2.style.visibility = "hidden";
-  main_content2.style.display="none";
+  main_content2.style.display = "none";
   reject_reason.style.visibility = "hidden";
   main_content.style.display = "block";
   main_content3.style.display = "none";
@@ -301,7 +295,7 @@ post_agree.onclick = async () => {
 //    rejectbtn.onclick = () =>{
 //         const reasonvalue = reason.options[reason.selectedIndex].value;
 
-//         axios.get("http://127.0.0.1:8080/nonagreeuser/rejectUpdate",{
+//         axios.get("http://najak.store/nonagreeuser/rejectUpdate",{
 
 //             withCredentials: true,
 
@@ -362,17 +356,16 @@ chat_agree.onclick = async () => {
     //usn : User Span Name
     let userClick = document.querySelectorAll(".userClick");
     let usn = document.querySelectorAll(".usn");
-    
 
     userClick.forEach((el, index) => {
       el.style.backgroundColor = "";
       el.onclick = async (e) => {
-      //console.log(e)
-      const zeroCnt = e.target.querySelector(".zeroCnt");
-      //console.log(zeroCnt);
+        //console.log(e)
+        const zeroCnt = e.target.querySelector(".zeroCnt");
+        //console.log(zeroCnt);
 
         // 메세지가 왔을 때
-        if(zeroCnt !=null){
+        if (zeroCnt != null) {
           zeroCnt.style.display = "none";
         }
 
@@ -433,8 +426,6 @@ chat_agree.onclick = async () => {
           chatArea.scrollTop = chatArea.scrollHeight;
         }, 0);
       };
-
-      
     });
   });
 
@@ -443,8 +434,7 @@ chat_agree.onclick = async () => {
     adminMsg.value = "";
   };
 
-  socket.on("message", async(chat_id, user_name, msg) => {
-
+  socket.on("message", async (chat_id, user_name, msg) => {
     await axios.get(`${backend}/chat/changeone`, {
       withCredentials: true,
 
@@ -452,7 +442,6 @@ chat_agree.onclick = async () => {
         chat_id: chat_id,
       },
     });
-
 
     if (user_name == "testadmin") {
       chatArea.innerHTML += `

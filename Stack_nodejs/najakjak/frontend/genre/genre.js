@@ -1,4 +1,4 @@
-const backend = "http://127.0.0.1:8080";
+const backend = "http://najak.store";
 const frontend = "/frontend";
 
 async function logincheck() {

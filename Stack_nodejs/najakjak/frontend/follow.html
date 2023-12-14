@@ -18,7 +18,7 @@
   <!-- 로고 부분 -->
   <div class="nav">
     <div class="logoBox">
-      <a href="/index.html"><img src="http://127.0.0.1:8080/img/Black logo - no background.png"
+      <a href="/index.html"><img src="http://najak.store/img/Black logo - no background.png"
           alt="" /></a>
       <div class="functionBox">
         <!-- 추리, 공포•스릴러, 판타지, 무협, 게임 ,로맨스 -->
@@ -55,7 +55,7 @@
     async function followAPI() {
       try {
         const data2 = await axios.get(
-           "http://127.0.0.1:8080/follow/add",
+           "http://najak.store/follow/add",
            { withCredentials: true}
         );
         //console.log("-----------------")
@@ -65,7 +65,7 @@
         tr.forEach((el) => {
           list.innerHTML += `
         <div class="booklist">
-            <div class="bookcover"><img class="img-box" src="http://127.0.0.1:8080${el.user_img}" alt=""></div>
+            <div class="bookcover"><img class="img-box" src="http://najak.store${el.user_img}" alt=""></div>
             <div>writer name : ${el.nickname}</div>
         </div>`
 
@@ -78,7 +78,7 @@
   //  async function followAPI() {
   //   try {
   //     const data = await axios.get(
-  //       "http://127.0.0.1:8080/follow/list",
+  //       "http://najak.store/follow/list",
   //       { withCredentials: true}
   //     );
   //     //console.log(data);

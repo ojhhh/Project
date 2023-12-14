@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="./css/chat.css" />
-    <script src="http://127.0.0.1:8080/socket.io/socket.io.js"></script>
+    <script src="http://najak.store/socket.io/socket.io.js"></script>
   </head>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <body>
@@ -40,7 +40,7 @@
   <script>
     window.onload = ()=>{
 
-  const socket = io.connect("http://127.0.0.1:8080");
+  const socket = io.connect("http://najak.store");
   let chat_id;  
   const user_name = "admin";
   let userTemp;
@@ -55,7 +55,7 @@
     }
     const userName = e.target.innerHTML;
 
-    chatUserInfo = await axios.get("http://127.0.0.1:8080/chat/getUserInfo",{withCredentials: true, 
+    chatUserInfo = await axios.get("http://najak.store/chat/getUserInfo",{withCredentials: true, 
     params : {
       user_id : userName,
     }});
@@ -75,7 +75,7 @@
     }
     const userName = e.target.innerHTML;
 
-    chatUserInfo = await axios.get("http://127.0.0.1:8080/chat/getUserInfo",{withCredentials: true, 
+    chatUserInfo = await axios.get("http://najak.store/chat/getUserInfo",{withCredentials: true, 
     params : {
       user_id : userName,
     }});

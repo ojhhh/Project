@@ -60,7 +60,7 @@ app.get("/", (req, res) => {
 
 app.use(
   cors({
-    origin: ["http://127.0.0.1:8080", "http://127.0.0.1:5500"],
+    origin: ["http://najak.store", "http://127.0.0.1:5500"],
     credentials: true,
   })
 );
